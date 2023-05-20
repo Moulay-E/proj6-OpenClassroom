@@ -1,5 +1,6 @@
 
 import {filtrer,generationFigure, categorie} from "./component/filter.js";
+import { fetchThemAll } from "./component/fetch.js";
 
 const all = document.querySelector(".portfolio__btn__all");
 const object = document.querySelector(".portfolio__btn__object");
@@ -12,39 +13,59 @@ const hotel = document.querySelector(".portfolio__btn__hotel");
 // let chemin = http://localhost:5678/
 let categorieData;
 let work ;
-fetch('http://localhost:5678/api/categories')
-  .then(response => response.json())
-  .then(data => {
-    // Traitez les données reçues du serveur ici
-    console.log(data);
-    return categorieData = data;
-   
-//    filtrer(apartment, [appt],work );
-//   filtrer(hotel, [hostel],work );
-  })
-  .catch(error => {
-    // Gérez les erreurs ici
-    console.error(error);
-  });
+const categorieUrl = 'http://localhost:5678/api/categories';
+const workUrl = 'http://localhost:5678/api/works';
 
-
-  fetch('http://localhost:5678/api/works')
-  .then(response => response.json())
-  .then(data => {
-    // Traitez les données reçues du serveur ici
+fetchThemAll(categorieUrl)
+.then( data => {
+    categorieData = data;
+    console.log(categorieData);
+    return categorieData;
+});
+fetchThemAll(workUrl)
+.then( data =>  {
     work = data;
+    console.log(work);
+    console.log("generer base");
+    //premiere generation depuis serveur
     generationFigure(work);
-      filtrer(object, [obj],work );
-    // filtrer(object, [1],work );
-    // filtrer(apartment, [2],work );
-    // filtrer(hotel, [3],work );
-    // filtrer(all, [1,2,3],work );
-    console.log(data);
-  })
-  .catch(error => {
-    // Gérez les erreurs ici
-    console.error(error);
-  });
+    return work;
+});
+
+// const fetchCategorie = fetch('http://localhost:5678/api/categories')
+//   .then(response => response.json())
+//   .then(data => {
+//     // Traitez les données reçues du serveur ici
+//     console.log(data);
+//     return categorieData = data;
+   
+// //    filtrer(apartment, [appt],work );
+// //   filtrer(hotel, [hostel],work );
+//   })
+//   .catch(error => {
+//     // Gérez les erreurs ici
+//     console.error(error);
+//   });
+
+
+
+//   const fetchWork = fetch('http://localhost:5678/api/works')
+//   .then(response => response.json())
+//   .then(data => {
+//     // Traitez les données reçues du serveur ici
+//     work = data;
+//     generationFigure(work);
+//     //   filtrer(object, [obj],work );
+//     // filtrer(object, [1],work );
+//     // filtrer(apartment, [2],work );
+//     // filtrer(hotel, [3],work );
+//     // filtrer(all, [1,2,3],work );
+//     console.log(data);
+//   })
+//   .catch(error => {
+//     // Gérez les erreurs ici
+//     console.error(error);
+//   });
 
 
   const autentification = {
@@ -71,7 +92,22 @@ fetch('http://localhost:5678/api/categories')
     console.error(error);
   });
 
-  
 
 
+Promise.all([fetchThemAll(categorieUrl), fetchThemAll(workUrl)])
+  .then(data => {
+    console.log("promise")
+    const categorieData = data[0];
+    const work = data[1];
+    console.dir(categorieData);
+    console.dir(work);
+   const {obj, appt, hostel} =  categorie(categorieData);
+   console.dir(obj +' '+ appt + ' '+  hostel);
+
+// application des filtres 
+    filtrer(object, [obj],work );
+    filtrer(apartment, [appt],work );
+    filtrer(hotel, [hostel],work );
+    filtrer(all, [obj, appt, hostel],work );
+  });
 
