@@ -11,11 +11,3 @@ export function fetchThemAll(url){
         console.log(error);
     }));
 }
-
-// export function fetchWork(){
-//     return fetch('http://localhost:5678/api/works')
-//     .then(response=> response.json()
-//     .catch(error => {
-//         console.log(error)
-//     }));
-// }

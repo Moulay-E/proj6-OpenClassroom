@@ -7,10 +7,6 @@ const object = document.querySelector(".portfolio__btn__object");
 const apartment = document.querySelector(".portfolio__btn__apartment");
 const hotel = document.querySelector(".portfolio__btn__hotel");
 
-
-
-
-// let chemin = http://localhost:5678/
 let categorieData;
 let work ;
 const categorieUrl = 'http://localhost:5678/api/categories';
@@ -31,42 +27,6 @@ fetchThemAll(workUrl)
     generationFigure(work);
     return work;
 });
-
-// const fetchCategorie = fetch('http://localhost:5678/api/categories')
-//   .then(response => response.json())
-//   .then(data => {
-//     // Traitez les données reçues du serveur ici
-//     console.log(data);
-//     return categorieData = data;
-   
-// //    filtrer(apartment, [appt],work );
-// //   filtrer(hotel, [hostel],work );
-//   })
-//   .catch(error => {
-//     // Gérez les erreurs ici
-//     console.error(error);
-//   });
-
-
-
-//   const fetchWork = fetch('http://localhost:5678/api/works')
-//   .then(response => response.json())
-//   .then(data => {
-//     // Traitez les données reçues du serveur ici
-//     work = data;
-//     generationFigure(work);
-//     //   filtrer(object, [obj],work );
-//     // filtrer(object, [1],work );
-//     // filtrer(apartment, [2],work );
-//     // filtrer(hotel, [3],work );
-//     // filtrer(all, [1,2,3],work );
-//     console.log(data);
-//   })
-//   .catch(error => {
-//     // Gérez les erreurs ici
-//     console.error(error);
-//   });
-
 
   const autentification = {
     "email": "sophie.bluel@test.tld",
@@ -93,7 +53,6 @@ fetchThemAll(workUrl)
   });
 
 
-
 Promise.all([fetchThemAll(categorieUrl), fetchThemAll(workUrl)])
   .then(data => {
     console.log("promise")
@@ -104,7 +63,6 @@ Promise.all([fetchThemAll(categorieUrl), fetchThemAll(workUrl)])
    const {obj, appt, hostel} =  categorie(categorieData);
    console.dir(obj +' '+ appt + ' '+  hostel);
 
-// application des filtres 
     filtrer(object, [obj],work );
     filtrer(apartment, [appt],work );
     filtrer(hotel, [hostel],work );
