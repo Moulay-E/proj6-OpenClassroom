@@ -1,11 +1,26 @@
 
-// let chemin = http://localhost:5678/
+import {filtrer,generationFigure, categorie} from "./component/filter.js";
 
+const all = document.querySelector(".portfolio__btn__all");
+const object = document.querySelector(".portfolio__btn__object");
+const apartment = document.querySelector(".portfolio__btn__apartment");
+const hotel = document.querySelector(".portfolio__btn__hotel");
+
+
+
+
+// let chemin = http://localhost:5678/
+let categorieData;
+let work ;
 fetch('http://localhost:5678/api/categories')
   .then(response => response.json())
   .then(data => {
     // Traitez les données reçues du serveur ici
     console.log(data);
+    return categorieData = data;
+   
+//    filtrer(apartment, [appt],work );
+//   filtrer(hotel, [hostel],work );
   })
   .catch(error => {
     // Gérez les erreurs ici
@@ -17,6 +32,13 @@ fetch('http://localhost:5678/api/categories')
   .then(response => response.json())
   .then(data => {
     // Traitez les données reçues du serveur ici
+    work = data;
+    generationFigure(work);
+      filtrer(object, [obj],work );
+    // filtrer(object, [1],work );
+    // filtrer(apartment, [2],work );
+    // filtrer(hotel, [3],work );
+    // filtrer(all, [1,2,3],work );
     console.log(data);
   })
   .catch(error => {
@@ -48,5 +70,8 @@ fetch('http://localhost:5678/api/categories')
     // Gérez les erreurs ici
     console.error(error);
   });
+
+  
+
 
 
