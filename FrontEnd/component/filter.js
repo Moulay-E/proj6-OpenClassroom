@@ -2,6 +2,10 @@
 
  export function generationFigure(array){
     document.querySelector(".gallery").innerHTML="";
+    //utiliser for each pour non retoru de tableau
+    //et map pour un result
+        //eviter if et for
+        //ternaire jamais plus de un if et un else
     for( let i =0; i< array.length; i++) {
 
         const element = array[i];
@@ -27,7 +31,11 @@
  export function filtrer(variable,value, tableau){
     
     variable.addEventListener("click",function(){
-
+        //progra functionel = function pure 1 chose
+            //sepraer cete feunction filterr en differente function
+            //crer une function qui apelle des function 
+            // les function sont des outils
+            //function qui prend en para une fonction ce para = false function (para=false)
         const tableauFiltrer = tableau.filter(function(item){
             console.log(item.categoryId +"r");
             return value.includes(item.categoryId);

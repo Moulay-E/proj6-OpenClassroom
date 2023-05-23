@@ -1,6 +1,8 @@
+//mettre en asynch
+export function fetchThemAll(url, parameter ={}){
 
-export function fetchThemAll(url){
-    return fetch(url)
+
+    return fetch(url,parameter)
     .then(response => response.json()
     .then(data => {
         console.dir(data)
@@ -11,3 +13,4 @@ export function fetchThemAll(url){
         console.log(error);
     }));
 }
+

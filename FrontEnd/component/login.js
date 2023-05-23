@@ -5,17 +5,27 @@ const autentification = {
   password: "S0phie",
 };
 
+const   postParameter=  {
+  method: "POST",
+headers: {
+"Content-Type": "application/json",
+},
+body: loginJson,
+} ;
+
 const LoginForm = document.querySelector(".login");
 LoginForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
   const tryLogin = {
     email: event.target.querySelector("[name=email]").value,
-    password: event.target.querySelector("[name=password]").value,
+    password: event.target.querySelector("[name=password]").value
   };
   console.dir(tryLogin);
   const loginJson = JSON.stringify(tryLogin);
-  fetchLogin(loginJson).then(()=>{
+  // fetchLogin(loginJson)
+  fetchThemAll(url,  postParameter)
+  .then(()=>{
     AutorisationLogin(status)
   });
 });
@@ -32,7 +42,7 @@ function fetchLogin(loginJson) {
       status = response.status; 
       console.log(status);
 
-    return response.json();
+      return response.json();
     })
     .then((data) => {
       console.dir(data);
@@ -51,16 +61,25 @@ function fetchLogin(loginJson) {
 
 function AutorisationLogin(status) {
   const error = document.querySelector(".error");
+  const email = document.querySelector("[name=email]");
   const pass = document.querySelector("[name=password]");
+
   if (status === 200){
     console.log("vous êtes connecter");
     error.style.display = "none";
-    pass.style.backgroundColor = "white";
+      email.classList.remove("errrorAnimation");
+      pass.classList.remove("errrorAnimation");
+      // window.location.assign("http://127.0.0.1:5500/FrontEnd/index.html");
   }
   else{
+    error.style.display = "block";
+    email.classList.add("errrorAnimation"); 
+    pass.classList.add("errrorAnimation"); ;
     console.log("vous ete pas co");
-     pass.style.backgroundColor = "red";
-     error.style.display = "block";
+     setTimeout(()=> {
+      email.classList.remove("errrorAnimation");
+      pass.classList.remove("errrorAnimation");
+     }, 1000)
   }
 
 };
