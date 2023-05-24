@@ -27,7 +27,6 @@
 
 }
 
-
  export function filtrer(variable,value, tableau){
     
     variable.addEventListener("click",function(){
