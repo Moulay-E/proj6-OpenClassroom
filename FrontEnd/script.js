@@ -13,6 +13,12 @@ const categorieUrl = 'http://localhost:5678/api/categories';
 const workUrl = 'http://localhost:5678/api/works';
 
 fetchThemAll(categorieUrl)
+.then(data => {
+  console.log(data + ' test')
+});
+
+
+fetchThemAll(categorieUrl)
 .then( data => {
     categorieData = data;
     console.log(categorieData);
@@ -53,6 +59,7 @@ fetchThemAll(workUrl)
   });
 
 
+  // recupereation donner des fetch et lancement fonction filtre et attribution button
 Promise.all([fetchThemAll(categorieUrl), fetchThemAll(workUrl)])
   .then(data => {
     console.log("promise")
