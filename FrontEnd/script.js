@@ -8,14 +8,22 @@ const apartment = document.querySelector(".portfolio__btn__apartment");
 const hotel = document.querySelector(".portfolio__btn__hotel");
 
 let categorieData;
-let work ;
+// let work ;
 const categorieUrl = 'http://localhost:5678/api/categories';
 const workUrl = 'http://localhost:5678/api/works';
 
-fetchThemAll(categorieUrl)
-.then(data => {
-  console.log(data + ' test')
-});
+//fonction qui fait un fetch avec un await pour att la reponse et l'attribuer a une variable
+const test = await fetchThemAll(categorieUrl);
+console.log(test, 'ges');
+// .then(data => {
+//   data.forEach(obj => {
+//     console.log(obj + ' test');
+//     // Affichez d'autres propriétés selon vos besoins
+//   });
+// });
+// .then(data => {
+//   console.log(data, " test");
+// });
 
 
 fetchThemAll(categorieUrl)
@@ -24,15 +32,38 @@ fetchThemAll(categorieUrl)
     console.log(categorieData);
     return categorieData;
 });
-fetchThemAll(workUrl)
-.then( data =>  {
-    work = data;
-    console.log(work);
-    console.log("generer base");
-    //premiere generation depuis serveur
-    generationFigure(work);
-    return work;
-});
+await fetchThemAll(workUrl)
+.then(work => {
+  console.log(work , "www");
+  generationFigure(work);
+})
+
+//test gpt
+// const person = [
+//   "name", 'John Doe',
+//   "age", 30
+// ];
+// const { name, ...other } = person;
+// async function fetchData() {
+//   try {
+//     const workData = await fetchThemAll(workUrl);
+//     console.log(workData, "www");
+//     generationFigure(workData);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
+
+// fetchData();
+// fetchThemAll(workUrl)
+// .then( data =>  {
+//     work = data;
+//     console.log(work);
+//     console.log("generer base");
+//     //premiere generation depuis serveur
+//     generationFigure(work);
+//     return work;
+// });
 
   const autentification = {
     "email": "sophie.bluel@test.tld",

@@ -24,6 +24,7 @@
         figure.appendChild(figTxt);
         gallery.appendChild(figure);
     }
+    return array;
 }
 
  export function filtrer(variable,value, tableau){

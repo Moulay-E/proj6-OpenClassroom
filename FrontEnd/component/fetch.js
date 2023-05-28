@@ -1,6 +1,6 @@
 //mettre en asynch
-export async function fetchThemAll(url/*, parameter ={}*/){
-
+export async function fetchThemAll(url) /*, parameter ={}*/{
+  
     try {
         const response = await fetch(url/*,parameter*/)
         const data = await response.json();
