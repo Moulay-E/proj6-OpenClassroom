@@ -1,17 +1,20 @@
+import { fetchThemAll } from "./fetch.js";
+
 export let tokens;
 export let status;
+let url = "http://localhost:5678/api/users/login";
 const autentification = {
   email: "sophie.bluel@test.tld",
   password: "S0phie",
 };
 
-const   postParameter=  {
-  method: "POST",
-headers: {
-"Content-Type": "application/json",
-},
-body: loginJson,
-} ;
+// const   loginParameter=  {
+//   method: "POST",
+// headers: {
+// "Content-Type": "application/json",
+// },
+// body: loginJson,
+// } ;
 
 const LoginForm = document.querySelector(".login");
 LoginForm.addEventListener("submit", function (event) {
@@ -23,12 +26,58 @@ LoginForm.addEventListener("submit", function (event) {
   };
   console.dir(tryLogin);
   const loginJson = JSON.stringify(tryLogin);
-  // fetchLogin(loginJson)
-  fetchThemAll(url,  postParameter)
-  .then(()=>{
-    AutorisationLogin(status)
-  });
+
+  const   loginParameter=  {
+    method: "POST",
+  headers: {
+  "Content-Type": "application/json",
+  },
+  body: loginJson,
+  } ;
+  fetchLogin(loginJson);
+  // fetchThemAll(url,  loginParameter)  
+//   function fetchThem() {
+//     return fetch("http://localhost:5678/api/users/login", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: loginJson,
+//     })
+//   }
+// fetchThem()
+  // .then((response) => {
+  //   status = response.status; 
+  //   console.log("s");
+  //   console.log(response);
+  //   console.log("r");
+  //   console.log(status);
+  //   console.log(status);
+  
+  
+  //   return response.json();
+  // })
+  // .then((data) => {
+  //     status = data.status; 
+  //     return data.json();
+  //   });
+//   .then((response)=>{
+//     console.log(response);
+//     console.log("hello");
+//     console.log(response.status);
+//     AutorisationLogin(response.status);
+//     return response.json();
+//   })
+//   .then((response) => {
+//     console.dir(response);
+//     // Traitez les données reçues du serveur ici
+//     tokens = response;
+//     console.log(response);
+//     console.log(tokens.token + " voici le token ");
+//     return tokens;
+// });
 });
+
 
 function fetchLogin(loginJson) {
   return fetch("http://localhost:5678/api/users/login", {

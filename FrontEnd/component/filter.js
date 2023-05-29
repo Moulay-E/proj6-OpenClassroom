@@ -1,48 +1,49 @@
-
-
- export function generationFigure(array){
-    document.querySelector(".gallery").innerHTML="";
-    //utiliser for each pour non retoru de tableau
-    //et map pour un result
-        //eviter if et for
-        //ternaire jamais plus de un if et un else
-    for( let i =0; i< array.length; i++) {
-
-        const element = array[i];
-        const gallery = document.querySelector(".gallery");
-
-        const figure = document.createElement("figure");
-
-        const img = document.createElement("img");
-        img.src = element.imageUrl;
-
-        const figTxt = document.createElement("figcaption");
-        figTxt.innerText = element.title;
-
-        // on rattaache tous sa et l'organise
-        figure.appendChild(img);
-        figure.appendChild(figTxt);
-        gallery.appendChild(figure);
-    }
-    return array;
-}
-
- export function filtrer(variable,value, tableau){
-    
-    variable.addEventListener("click",function(){
-        //progra functionel = function pure 1 chose
+       //progra functionel = function pure 1 chose
             //sepraer cete feunction filterr en differente function
             //crer une function qui apelle des function 
             // les function sont des outils
             //function qui prend en para une fonction ce para = false function (para=false)
-        const tableauFiltrer = tableau.filter(function(item){
+ //utiliser for each pour non retoru de tableau
+    //et map pour un result
+        //eviter if et for
+        //ternaire jamais plus de un if et un else
+
+ export function generationFigure(array){
+    document.querySelector(".gallery").innerHTML="";
+   
+        array.map(element => {
+
+            const gallery = document.querySelector(".gallery");
+            
+            const figure = document.createElement("figure");
+            
+            const img = document.createElement("img");
+            img.src = element.imageUrl;
+            
+            const figTxt = document.createElement("figcaption");
+            figTxt.innerText = element.title;
+            
+            // on rattaache tous sa et l'organise
+            figure.appendChild(img);
+            figure.appendChild(figTxt);
+            gallery.appendChild(figure);
+        })     
+}
+
+// crée les btn clicable et filtre le tableau pour en crer un nouveau
+// a partir de ce tableau appelle la fonction genererfigure pour 
+//pour actualiser l'affichage en fonction du filtre souhaiter
+ export function filtrer(btn,categorie, array){
+    
+    btn.addEventListener("click",function(){
+        const arrayFiltrer = array.filter(function(item){
             console.log(item.categoryId +"r");
-            return value.includes(item.categoryId);
-            // item.categoryId  === value;
+            return categorie.includes(item.categoryId);
+            // item.categoryId  === categorie;
         })
-        // val = tableauFiltrer.title;
-        console.log(tableauFiltrer+ "tab");
-        generationFigure(tableauFiltrer);
+        // val = arrayFiltrer.title;
+        console.log(arrayFiltrer+ "tab");
+        generationFigure(arrayFiltrer);
     })
 };
 
@@ -51,30 +52,29 @@
 
 export function categorie(array) {
     let result = {};
-    for(let i = 0; i< array.length; i++){
-          
-         switch(array[i].name){
+    array.map(element => {
+
+    
+         switch(element.name){
             case "Objets":
-                result.obj = array[i].id;
+                result.obj = element.id;
                 console.log("obj"+ result.obj)
                 break;
 
                 case "Appartements":
-                result.appt = array[i].id;
+                result.appt = element.id;
                 console.log("appt"+ result.appt)
                 break;
 
                 case "Hotels & restaurants":
-                result.hostel = array[i].id;
+                result.hostel = element.id;
                 console.log("hotel"+  result.hostel)
                 break;
          }
-    }
+    })
     return result;
    
 }
-
-
 
 
 // document.querySelector(".gallery").innerHTML="";
