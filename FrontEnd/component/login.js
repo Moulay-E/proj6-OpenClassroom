@@ -3,6 +3,7 @@ import { fetchThemAll } from "./fetch.js";
 export let tokens;
 export let status;
 let url = "http://localhost:5678/api/users/login";
+
 const autentification = {
   email: "sophie.bluel@test.tld",
   password: "S0phie",
@@ -26,56 +27,16 @@ LoginForm.addEventListener("submit", function (event) {
   };
   console.dir(tryLogin);
   const loginJson = JSON.stringify(tryLogin);
+  // const   loginParameter=  {
+  //   method: "POST",
+  // headers: {
+  // "Content-Type": "application/json",
+  // },
+  // body: loginJson,
+  // } ;
 
-  const   loginParameter=  {
-    method: "POST",
-  headers: {
-  "Content-Type": "application/json",
-  },
-  body: loginJson,
-  } ;
   fetchLogin(loginJson);
-  // fetchThemAll(url,  loginParameter)  
-//   function fetchThem() {
-//     return fetch("http://localhost:5678/api/users/login", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: loginJson,
-//     })
-//   }
-// fetchThem()
-  // .then((response) => {
-  //   status = response.status; 
-  //   console.log("s");
-  //   console.log(response);
-  //   console.log("r");
-  //   console.log(status);
-  //   console.log(status);
-  
-  
-  //   return response.json();
-  // })
-  // .then((data) => {
-  //     status = data.status; 
-  //     return data.json();
-  //   });
-//   .then((response)=>{
-//     console.log(response);
-//     console.log("hello");
-//     console.log(response.status);
-//     AutorisationLogin(response.status);
-//     return response.json();
-//   })
-//   .then((response) => {
-//     console.dir(response);
-//     // Traitez les données reçues du serveur ici
-//     tokens = response;
-//     console.log(response);
-//     console.log(tokens.token + " voici le token ");
-//     return tokens;
-// });
+  // fetchThemAll(url,  loginParameter) 
 });
 
 
@@ -90,7 +51,7 @@ function fetchLogin(loginJson) {
     .then((response) => {
       status = response.status; 
       console.log(status);
-
+      AutorisationLogin(status);
       return response.json();
     })
     .then((data) => {
@@ -98,7 +59,7 @@ function fetchLogin(loginJson) {
       // Traitez les données reçues du serveur ici
       tokens = data;
       console.log(data);
-      console.log(tokens.token + " voici le token ");
+      console.log(tokens , " voici le token ");
       return tokens;
     })
     .catch((error) => {
@@ -113,22 +74,72 @@ function AutorisationLogin(status) {
   const email = document.querySelector("[name=email]");
   const pass = document.querySelector("[name=password]");
 
-  if (status === 200){
-    console.log("vous êtes connecter");
-    error.style.display = "none";
+  const statusActions = {
+    200: () => {
+      console.log("vous êtes connecté");
+      error.style.display = "none";
       email.classList.remove("errrorAnimation");
       pass.classList.remove("errrorAnimation");
       // window.location.assign("http://127.0.0.1:5500/FrontEnd/index.html");
-  }
-  else{
-    error.style.display = "block";
-    email.classList.add("errrorAnimation"); 
-    pass.classList.add("errrorAnimation"); ;
-    console.log("vous ete pas co");
-     setTimeout(()=> {
-      email.classList.remove("errrorAnimation");
-      pass.classList.remove("errrorAnimation");
-     }, 1000)
-  }
+    },
+    default: () => {
+      error.style.display = "block";
+      email.classList.add("errrorAnimation");
+      pass.classList.add("errrorAnimation");
+      console.log("vous n'êtes pas connecté");
+      setTimeout(() => {
+        email.classList.remove("errrorAnimation");
+        pass.classList.remove("errrorAnimation");
+      }, 1000);
+    },
+  };
 
-};
+  const action = statusActions[status] || statusActions.default;
+  action();
+}
+/*cette fonction prend un para le status
+  elle crée un objet avec deux clef qui contiennent
+  chacun en valeur une fonction anonyme flecher pour
+  exécuter des ordres
+  l'objet et ensuite passer en valeur a une constante 
+  action qui prendra en valeur non pas l'objet global 
+  mais une des deux valeur des clef qui sont des fonction
+  action prendra en valeur celle qui existe 
+  et pour obtenir la premirer valeur il faut que la clef soit
+  200 donc que la valeur de la fonction soit 200 
+  ont exécute action() comme un fonction car il
+  contient au minimun une fonction
+  lors de sont apelle il va verifier a qu'elle valeur 
+  il correspond auquelle ont a choisie a l'attribution 
+  de lui donner un comparateur de clef pour lui donner
+  celle dont on veut que la fonction soit utiliser
+  en conclusion c'est un if/else élégant et pas simple 
+*/
+
+
+//----------cimetierer-----------
+
+// function AutorisationLogin(status) {
+//   const error = document.querySelector(".error");
+//   const email = document.querySelector("[name=email]");
+//   const pass = document.querySelector("[name=password]");
+
+//   if (status === 200){
+//     console.log("vous êtes connecter");
+//     error.style.display = "none";
+//       email.classList.remove("errrorAnimation");
+//       pass.classList.remove("errrorAnimation");
+//       // window.location.assign("http://127.0.0.1:5500/FrontEnd/index.html");
+//   }
+//   else{
+//     error.style.display = "block";
+//     email.classList.add("errrorAnimation"); 
+//     pass.classList.add("errrorAnimation"); ;
+//     console.log("vous ete pas co");
+//      setTimeout(()=> {
+//       email.classList.remove("errrorAnimation");
+//       pass.classList.remove("errrorAnimation");
+//      }, 1000)
+//   }
+
+// };
