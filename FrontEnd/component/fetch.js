@@ -4,6 +4,9 @@
 // pour le login dans notre cas 
 // avec un objet vide et des opérateur || ou
 //elle peut s'executer avec un seul parametre
+
+//cette fonction a besoin d'être stringify en json 
+// lord de son appel
 export async function fetchThemAll(url, option = {}) {
     try {
         const response = await fetch(url, {
@@ -12,8 +15,7 @@ export async function fetchThemAll(url, option = {}) {
             body: option.body || null,
           
         });
-        const data = await response.json();
-        return data;
+        return response;
     }
     catch (error){
         const errorMessage = !response.ok ? error  : "Erreur de la requete" ;
@@ -21,6 +23,14 @@ export async function fetchThemAll(url, option = {}) {
         return errorMessage;
     }
 };
+
+// permet de recuperer la version json du retour api
+export async function fetchJson (url){
+    const response = await fetchThemAll(url);
+    return response.json();
+
+}; 
+
 
 
 

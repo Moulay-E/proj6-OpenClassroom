@@ -1,6 +1,6 @@
 
 import {filtrer,generationFigure, categorie} from "./component/filter.js";
-import { fetchThemAll } from "./component/fetch.js";
+import { fetchThemAll, fetchJson } from "./component/fetch.js";
 
 const all = document.querySelector(".portfolio__btn__all");
 const object = document.querySelector(".portfolio__btn__object");
@@ -13,7 +13,7 @@ const categorieUrl = 'http://localhost:5678/api/categories';
 const workUrl = 'http://localhost:5678/api/works';
 
 //fonction qui fait un fetch avec un await pour att la reponse et l'attribuer a une variable
-const test = await fetchThemAll(categorieUrl);
+const test = await fetchJson(categorieUrl);
 console.log(test, 'ges');
 // .then(data => {
 //   data.forEach(obj => {
@@ -26,13 +26,14 @@ console.log(test, 'ges');
 // });
 
 
-fetchThemAll(categorieUrl)
+await fetchJson(categorieUrl)
 .then( data => {
     categorieData = data;
     console.log(categorieData);
     return categorieData;
 });
-await fetchThemAll(workUrl)
+// await fetchThemAll(workUrl)
+await fetchJson(workUrl)
 .then(work => {
   console.log(work , "www");
   generationFigure(work);
@@ -91,7 +92,7 @@ await fetchThemAll(workUrl)
 
 
   // recupereation donner des fetch et lancement fonction filtre et attribution button
-Promise.all([fetchThemAll(categorieUrl), fetchThemAll(workUrl)])
+Promise.all([fetchJson(categorieUrl), fetchJson(workUrl)])
   .then(data => {
     console.log("promise")
     const categorieData = data[0];

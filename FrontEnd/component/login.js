@@ -9,13 +9,6 @@ const autentification = {
   password: "S0phie",
 };
 
-// const   loginParameter=  {
-//   method: "POST",
-// headers: {
-// "Content-Type": "application/json",
-// },
-// body: loginJson,
-// } ;
 
 const LoginForm = document.querySelector(".login");
 LoginForm.addEventListener("submit", function (event) {
@@ -27,46 +20,59 @@ LoginForm.addEventListener("submit", function (event) {
   };
   console.dir(tryLogin);
   const loginJson = JSON.stringify(tryLogin);
-  // const   loginParameter=  {
-  //   method: "POST",
-  // headers: {
-  // "Content-Type": "application/json",
-  // },
-  // body: loginJson,
-  // } ;
+  const   loginParameter=  {
+    method: "POST",
+  headers: {
+  "Content-Type": "application/json",
+  },
+  body: loginJson,
+  } ;
 
-  fetchLogin(loginJson);
-  // fetchThemAll(url,  loginParameter) 
+  // fetchLogin(loginJson);
+  fetchThemAll(url,  loginParameter)
+  .then((response) => {
+    console.log(response, "ce que sa devrait afficer");      
+    status = response.status; 
+    console.log(status);
+    return response.json();
+  })
+  .then((response)=> {
+    tokens = response
+    console.log(tokens);
+    AutorisationLogin(status);
+    return tokens;
+  })
 });
 
 
-function fetchLogin(loginJson) {
-  return fetch("http://localhost:5678/api/users/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: loginJson,
-  })
-    .then((response) => {
-      status = response.status; 
-      console.log(status);
-      AutorisationLogin(status);
-      return response.json();
-    })
-    .then((data) => {
-      console.dir(data);
-      // Traitez les données reçues du serveur ici
-      tokens = data;
-      console.log(data);
-      console.log(tokens , " voici le token ");
-      return tokens;
-    })
-    .catch((error) => {
-      // Gérez les erreurs ici
-      console.error(error);
-    });
-};
+// function fetchLogin(loginJson) {
+//   return fetch("http://localhost:5678/api/users/login", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: loginJson,
+//   })
+//     .then((response) => {
+//       console.log(response, "ce que sa devrait afficer");      
+//       status = response.status; 
+//       console.log(status);
+//       AutorisationLogin(status);
+//       return response;
+//     })
+//     .then((data) => {
+//       console.log(data , "tfgfgdgdgdgdg");
+//       // Traitez les données reçues du serveur ici
+//       tokens = data;
+//       console.log(data);
+//       console.log(tokens , " voici le token ");
+//       return tokens;
+//     })
+//     .catch((error) => {
+//       // Gérez les erreurs ici
+//       console.error(error);
+//     });
+// };
 
 
 function AutorisationLogin(status) {
@@ -80,6 +86,11 @@ function AutorisationLogin(status) {
       error.style.display = "none";
       email.classList.remove("errrorAnimation");
       pass.classList.remove("errrorAnimation");
+      localStorage.setItem("Token" , JSON.stringify(tokens));
+      let local =  localStorage.getItem("Token");
+      let parsedLocal = JSON.parse(local);
+      console.log(local, 'string');
+      console.log(parsedLocal, 'parsed');
       // window.location.assign("http://127.0.0.1:5500/FrontEnd/index.html");
     },
     default: () => {
