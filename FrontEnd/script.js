@@ -1,6 +1,7 @@
 
 import {filtrer,generationFigure, categorie} from "./component/filter.js";
 import { fetchThemAll, fetchJson } from "./component/fetch.js";
+import { openModal, closeModal } from "./component/modal.js";
 
 const all = document.querySelector(".portfolio__btn__all");
 const object = document.querySelector(".portfolio__btn__object");
@@ -109,3 +110,19 @@ Promise.all([fetchJson(categorieUrl), fetchJson(workUrl)])
     filtrer(all, [obj, appt, hostel],work );
   });
 
+
+
+  document.querySelectorAll(".js-modal")
+.forEach(a => {
+    a.addEventListener("click", openModal)
+});
+
+// window.addEventListener("keydown", function(e){
+//   console.log(e.key);
+//   if(e.key === "Escape" || e.key === "Esc" ){
+//       closeModal(e);
+//   }
+//   if(e.key === "Tav" && modal !== null){
+//       focusInModal(e);
+//   }
+// })
