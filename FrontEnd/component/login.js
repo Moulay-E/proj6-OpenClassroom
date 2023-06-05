@@ -8,10 +8,9 @@ const autentification = {
   email: "sophie.bluel@test.tld",
   password: "S0phie",
 };
-
-
+function login(){
 const LoginForm = document.querySelector(".login");
-LoginForm.addEventListener("submit", function (event) {
+LoginForm?.addEventListener("submit", function (event) {
   event.preventDefault();
 
   const tryLogin = {
@@ -43,6 +42,8 @@ LoginForm.addEventListener("submit", function (event) {
     return tokens;
   })
 });
+}
+login();
 
 
 // function fetchLogin(loginJson) {
@@ -108,6 +109,27 @@ function AutorisationLogin(status) {
   const action = statusActions[status] || statusActions.default;
   action();
 }
+
+// export let localToken = null;
+// let localToken
+
+export async function logout (localToken){
+  await Promise.resolve(localToken);
+  let headerUl = document.querySelector("header > nav > ul");
+  let logoutHtml = headerUl.children[2];
+  logoutHtml.innerText = "Logout";
+
+  function suppr (e){
+    e.preventDefault();
+    localStorage.removeItem("Token");
+    localToken = null;
+    logoutHtml.innerText = "login";
+    logoutHtml.removeEventListener("click", suppr);
+  }
+  if (localToken !== null)
+  logoutHtml.addEventListener("click", suppr); 
+};
+
 /*cette fonction prend un para le status
   elle crée un objet avec deux clef qui contiennent
   chacun en valeur une fonction anonyme flecher pour

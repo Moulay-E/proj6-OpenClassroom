@@ -6,8 +6,13 @@ let focusables = [];
 let previouslyFocused = null;
 
 export const openModal = (e)=>{
+    // let tes = document.querySelector(".js-modal");
+    // let tess = tes.querySelector(e.target.getAttribute("href"));
+    // console.log(tess)
+
     e.preventDefault();
     modal = document.querySelector(e.target.getAttribute("href"));
+    console.log(modal, "test")
     focusables = Array.from(modal.querySelectorAll(focusableSelector));
     previouslyFocused = document.querySelector(":focus");
     focusables[0].focus();
@@ -33,7 +38,7 @@ export const closeModal = (e) =>{
     //     modal.style.display = "none";
     //     modal = null;
     // })
-    modal.setAttribute("aria-hidden", true);
+    // modal.setAttribute("aria-hidden", true);
     modal.removeAttribute("aria-modal");
     modal.removeEventListener("click", closeModal);
     modal.querySelector(".js-modal-close")

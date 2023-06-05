@@ -2,12 +2,34 @@
 import {filtrer,generationFigure, categorie} from "./component/filter.js";
 import { fetchThemAll, fetchJson } from "./component/fetch.js";
 import { openModal, closeModal } from "./component/modal.js";
-
+import { logout} from "./component/login.js";
+// import  {logout} from  "./component/login.js"
 const all = document.querySelector(".portfolio__btn__all");
 const object = document.querySelector(".portfolio__btn__object");
 const apartment = document.querySelector(".portfolio__btn__apartment");
 const hotel = document.querySelector(".portfolio__btn__hotel");
 
+//    const tokenn=  await localStorage.getItem("Token");
+//    localToken = tokenn
+// } 
+let localToken;
+
+function getTokenFromLocalStorage() {
+  return new Promise((resolve, reject) => {
+    const token = localStorage.getItem("Token");
+    resolve(token);
+  });
+}
+
+async function tokenRecuperation() {
+  const token = await getTokenFromLocalStorage();
+  localToken = token;
+  console.log(localToken, 'string');
+}
+
+tokenRecuperation();
+
+logout(localToken);
 let categorieData;
 // let work ;
 const categorieUrl = 'http://localhost:5678/api/categories';
@@ -25,8 +47,7 @@ console.log(test, 'ges');
 // .then(data => {
 //   console.log(data, " test");
 // });
-let local =  localStorage.getItem("Token");
-console.log(local, 'string');
+
 
 await fetchJson(categorieUrl)
 .then( data => {

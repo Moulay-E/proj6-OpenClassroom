@@ -220,9 +220,27 @@ footer nav ul {
 	}
   }
    /*------------ modal box -----------------------*/
+
   *:focus {
 	box-shadow: 0 0 5px blue;
   }
+  .editor {
+	/* background-color: #000000; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 59px;
+	/* color: #fff; */
+  }
+.editor__h2{
+	font-family: Work Sans;
+	font-size: 16px;
+}.editor__btn{
+	font-family: Work Sans;
+	font-size: 14px;
+	color: #000000;
+	background-color: #fff;
+}
 
    .modal {
 	display: flex;
