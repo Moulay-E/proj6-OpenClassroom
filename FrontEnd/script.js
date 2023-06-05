@@ -64,7 +64,7 @@ async function tokenRecuperation() {
   console.log(localToken, 'string');
 }
 
-logout(localToken);
-tokenRecuperation();
+await tokenRecuperation();
+await logout(localToken);
 
 

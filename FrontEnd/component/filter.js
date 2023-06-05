@@ -1,12 +1,3 @@
-       //progra functionel = function pure 1 chose
-            //sepraer cete feunction filterr en differente function
-            //crer une function qui apelle des function 
-            // les function sont des outils
-            //function qui prend en para une fonction ce para = false function (para=false)
- //utiliser for each pour non retoru de tableau
-    //et map pour un result
-        //eviter if et for
-        //ternaire jamais plus de un if et un else
 
  export function generationFigure(array){
     document.querySelector(".gallery").innerHTML="";
@@ -30,70 +21,22 @@
         })     
 }
 
-// crée les btn clicable et filtre le tableau pour en crer un nouveau
-// a partir de ce tableau appelle la fonction genererfigure pour 
-//pour actualiser l'affichage en fonction du filtre souhaiter
+// creates clickable btn and filters the array to create a new one
+// from this array, call the genererfigure function to 
+// to update the display according to the desired filter
  export function filtrer(btn,categorie, array){
     
     btn.addEventListener("click",function(){
         const arrayFiltrer = array.filter(function(item){
             console.log(item.categoryId +"r");
             return categorie.includes(item.categoryId);
-            // item.categoryId  === categorie;
         })
-        // val = arrayFiltrer.title;
         console.log(arrayFiltrer+ "tab");
         generationFigure(arrayFiltrer);
     })
 };
-
-
-
-
-// export function categorie(array) {
-//     let result = {};
-//     array.map(element => {
-
-    
-//          switch(element.name){
-//             case "Objets":
-//                 result.obj = element.id;
-//                 console.log("obj"+ result.obj)
-//                 break;
-
-//                 case "Appartements":
-//                 result.appt = element.id;
-//                 console.log("appt"+ result.appt)
-//                 break;
-
-//                 case "Hotels & restaurants":
-//                 result.hostel = element.id;
-//                 console.log("hotel"+  result.hostel)
-//                 break;
-//          }
-//     })
-//     return result;
-   
-// }
-//v1 sans switch avec un if
-// export function categorie(array) {
-//     const mappings = {
-//       Objets: "obj",
-//       Appartements: "appt",
-//       "Hotels & restaurants": "hostel"
-//     };
-  
-//     const result = {};
-//     array.map(element => {
-//       const propertyName = mappings[element.name];
-//       if (propertyName) {
-//         result[propertyName] = element.id;
-//         console.log(propertyName + result[propertyName]);
-//       }
-//     });
-  
-//     return result;
-//   }
+//use map to compare the different elements of the object to check
+// whether they exist in the array and assign them to the new object
 export function categorie(array) {
     const mappings = {
       Objets: "obj",
@@ -111,6 +54,8 @@ export function categorie(array) {
     return result;
   }
   
+
+  //a suppr
 /*on crée un objet avec les clef et valeur, les cled
 corresponde a ce que l'on va recherecher sur l'objet
 que l'on va mapper
@@ -137,20 +82,4 @@ elle est élégante mais pas facile a comprendre
 et demande des notions avancé
 */
 
-// document.querySelector(".gallery").innerHTML="";
-// for(let key in tableauFiltrer[0]){
-//     let val = key + ':' + tableauFiltrer[0][key];
-//     document.querySelector(".gallery").innerHTML += "coucou "+ val + "<br>";
-// }
-// tableauFiltrer.forEach(function(item) {
-//     document.querySelector(".gallery").innerHTML += "coucou " + item + "<br>";
-// });
 
-// const boutonFiltrer = document.querySelector(".btn-filtrer");
-// boutonFiltrer.addEventListener("click", function(){
-//     const piecesFiltrees = pieces.filter(function (piece) {
-//         return piece.prix < 35;
-//     });
-//     document.querySelector(".fiches").innerHTML = "";
-//     genererPieces(piecesFiltrees);
-// });
