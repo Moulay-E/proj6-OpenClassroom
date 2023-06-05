@@ -34,42 +34,42 @@ export async function fetchJson (url){
 
 
 
-function fetchLogin(loginJson) {
-    return fetch("http://localhost:5678/api/users/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: loginJson,
-    })
-      .then((response) => {
-        status = response.status; 
-        console.log(status);
+// function fetchLogin(loginJson) {
+//     return fetch("http://localhost:5678/api/users/login", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: loginJson,
+//     })
+//       .then((response) => {
+//         status = response.status; 
+//         console.log(status);
   
-        return response.json();
-      })
-      .then((data) => {
-        console.dir(data);
-        // Traitez les données reçues du serveur ici
-        tokens = data;
-        console.log(data);
-        console.log(tokens.token + " voici le token ");
-        return tokens;
-      })
-      .catch((error) => {
-        // Gérez les erreurs ici
-        console.error(error);
-      });
-  };
+//         return response.json();
+//       })
+//       .then((data) => {
+//         console.dir(data);
+//         // Traitez les données reçues du serveur ici
+//         tokens = data;
+//         console.log(data);
+//         console.log(tokens.token + " voici le token ");
+//         return tokens;
+//       })
+//       .catch((error) => {
+//         // Gérez les erreurs ici
+//         console.error(error);
+//       });
+//   };
 
-    // .then(response => response.json()
-    // .then(data => {
-    //     console.dir(data)
-    //     console.log('ggg')
-    //     return data;
-    // })
-    // .catch(error =>{
-    //     console.log(error);
-    // }));
-//}
+//     // .then(response => response.json()
+//     // .then(data => {
+//     //     console.dir(data)
+//     //     console.log('ggg')
+//     //     return data;
+//     // })
+//     // .catch(error =>{
+//     //     console.log(error);
+//     // }));
+// //}
 

@@ -6,10 +6,6 @@ let focusables = [];
 let previouslyFocused = null;
 
 export const openModal = (e)=>{
-    // let tes = document.querySelector(".js-modal");
-    // let tess = tes.querySelector(e.target.getAttribute("href"));
-    // console.log(tess)
-
     e.preventDefault();
     modal = document.querySelector(e.target.getAttribute("href"));
     console.log(modal, "test")
@@ -58,7 +54,6 @@ document.querySelectorAll(".js-modal")
 });
 
 // navigat in the modal with keyborad
-
 
 const focusInModal = (e) => {
     e.preventDefault();

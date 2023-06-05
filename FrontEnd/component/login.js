@@ -117,7 +117,7 @@ export async function logout (localToken){
   await Promise.resolve(localToken);
   let headerUl = document.querySelector("header > nav > ul");
   let logoutHtml = headerUl.children[2];
-  logoutHtml.innerText = "Logout";
+  
 
   function suppr (e){
     e.preventDefault();
@@ -126,8 +126,10 @@ export async function logout (localToken){
     logoutHtml.innerText = "login";
     logoutHtml.removeEventListener("click", suppr);
   }
-  if (localToken !== null)
-  logoutHtml.addEventListener("click", suppr); 
+  if (localToken !== null && localToken !== undefined){
+    logoutHtml.innerText = "Logout";
+    logoutHtml.addEventListener("click", suppr); 
+  }
 };
 
 /*cette fonction prend un para le status
