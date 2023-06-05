@@ -28,7 +28,6 @@ LoginForm?.addEventListener("submit", function (event) {
   },
   body: loginJson,
   } ;
-  login();
 
 //uses functions stored in an object and query-based 
 //allocation to execute the functions
@@ -64,7 +63,7 @@ LoginForm?.addEventListener("submit", function (event) {
   
     const action = statusActions[status] || statusActions.default;
     action();
-  }
+  };
 
   fetchThemAll(url,  loginParameter)
   .then((response) => {
@@ -81,6 +80,9 @@ LoginForm?.addEventListener("submit", function (event) {
   })
 });
 }
+//login needs to be called after the 
+//fetch to get everything you need beforehand
+login();
 
 //use in the script in the index page
 //avoid using if/else
