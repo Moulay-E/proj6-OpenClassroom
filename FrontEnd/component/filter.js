@@ -1,10 +1,10 @@
 
- export function generationFigure(array){
-    document.querySelector(".gallery").innerHTML="";
+ export function generationFigure(array, classe = ".gallery"){
+    document.querySelector(classe).innerHTML="";
    
         array.map(element => {
 
-            const gallery = document.querySelector(".gallery");
+            const gallery = document.querySelector(classe);
             
             const figure = document.createElement("figure");
             

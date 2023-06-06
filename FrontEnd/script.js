@@ -26,6 +26,7 @@ await fetchJson(workUrl)
 .then(work => {
   console.log(work , "www");
   generationFigure(work);
+  generationFigure(work, ".modal__galery")
 })
 
   // fetch data and launch filter function and button allocation
