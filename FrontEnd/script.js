@@ -68,3 +68,28 @@ await tokenRecuperation();
 await logout(localToken);
 
 
+// document.addEventListener('DOMContentLoaded', () => {
+  // Votre code ici
+  console.log(document.querySelector("#upload"));
+  const imgInput = document.querySelector("#upload");
+  imgInput.addEventListener("change", (e)=> {
+      const file = e.target.files[0];
+      console.log(file,"fillllee");  
+      if(file){
+          const reader = new FileReader();
+          reader.onload = (e)=> {
+              const imageUrl = e.target.result;
+              // console.dir(imageUrl, "voici");
+              const imageElement = document.createElement("img");
+              imageElement.src = imageUrl;
+            
+              const test = document.createElement("p");
+              test.innerHTML='<p>fhsfhd</p>';
+              const modalImg = document.querySelector(".modal__galery");
+              modalImg.appendChild(imageElement);
+              modalImg.appendChild(test);
+          }
+          reader.readAsDataURL(file);
+      }
+  })
+// });

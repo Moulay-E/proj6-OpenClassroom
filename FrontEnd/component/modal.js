@@ -54,7 +54,6 @@ document.querySelectorAll(".js-modal")
 });
 
 // navigat in the modal with keyborad
-
 const focusInModal = (e) => {
     e.preventDefault();
     let index = focusables.findIndex(
@@ -85,3 +84,20 @@ window.addEventListener("keydown", function(e){
     }
 })
 
+
+// const imgInput = document.querySelector("#upload");
+// imgInput.addEventListener("change", (e)=> {
+//     const file = e.target.file[0];
+//     if(file){
+//         const reader = new FileReader;
+//         reader.onload = (e)=> {
+//             const imageUrl = e.target.result;
+//             const imageElement = document.createElement("img");
+//             imageElement.src = imageUrl;
+
+//             const modalImg = document.querySelector(".modal__galery");
+//             modalImg.appendChild(imageElement);
+//         }
+//         reader.readAsDataURL(file);
+//     }
+// })
