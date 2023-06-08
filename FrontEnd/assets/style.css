@@ -225,12 +225,12 @@ footer nav ul {
 	box-shadow: 0 0 5px blue;
   }
   .editor {
-	/* background-color: #000000; */
+	background-color: #000000;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 59px;
-	/* color: #fff; */
+	color: #fff;
   }
 .editor__h2{
 	font-family: Work Sans;
@@ -289,12 +289,46 @@ footer nav ul {
 }
 
 .modal__galery {
-    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-column-gap: 20px;
     grid-row-gap: 20px;
 }
-.modal__galery img{
-	object-fit: cover;
+.modal__galery > figure   {
+	display: grid;
+}
+.modal__galery > figure > img{
+	/* object-fit: cover; */
+	width: 180px;
+}
+
+.formAddPhoto{
+display: block;
+	width: 100%;
+	height: 670px;
+}
+.formAddPhoto__upload{
+	/* width: 80%; */
+	height: 169px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.formAddPhoto__title{
+	height: 69px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.formAddPhoto__categorie{
+	height: 69px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.formAddPhoto__submit{
+	height: 69px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

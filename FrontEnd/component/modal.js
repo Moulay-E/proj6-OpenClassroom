@@ -101,3 +101,66 @@ window.addEventListener("keydown", function(e){
 //         reader.readAsDataURL(file);
 //     }
 // })
+
+// document.addEventListener('DOMContentLoaded', () => {
+  // Votre code ici
+  function addImageModal(){
+      console.log(document.querySelector("#upload"));
+      const imgInput = document.querySelector("#upload");
+      imgInput.addEventListener("change", (e)=> {
+          const file = e.target.files[0];
+          console.log(file,"fillllee");  
+          if(file){
+              const reader = new FileReader();
+              reader.onload = (e)=> {
+                  const imageUrl = e.target.result;
+                  // console.dir(imageUrl, "voici");
+                  const imageElement = document.createElement("img");
+                  imageElement.src = imageUrl;
+                
+                  const modalImg = document.querySelector(".modal__galery");
+    
+                  const figure = document.createElement("figure");
+                  const test = document.createElement("figcaption");
+                  test.innerHTML='<p>fhsfhd</p>';
+                  figure.appendChild(imageElement);
+                  figure.appendChild(test);
+    
+                  modalImg.appendChild(figure);
+              }
+              reader.readAsDataURL(file);
+          }
+      })
+  }
+  addImageModal();
+
+  function validerImgs(){
+    const formElem = document.querySelector(".formAddPhoto");
+    formElem.addEventListener("submit", e =>{
+        e.preventDefault();
+
+        const dataForm = new FormData(formElem);
+        const data = Object.fromEntries(dataForm);
+
+        const imgInput = document.querySelector("#upload");
+        const imagefile = imgInput.files[0];
+        data.image = imagefile;
+        console.log(data);
+    })
+  }
+  validerImgs()
+// });
+// const gallery = document.querySelector(classe);
+            
+// const figure = document.createElement("figure");
+
+// const img = document.createElement("img");
+// img.src = element.imageUrl;
+
+// const figTxt = document.createElement("figcaption");
+// figTxt.innerText = element.title;
+
+// // on rattaache tous sa et l'organise
+// figure.appendChild(img);
+// figure.appendChild(figTxt);
+// gallery.appendChild(figure);

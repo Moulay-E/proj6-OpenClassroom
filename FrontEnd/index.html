@@ -36,29 +36,31 @@
 		</div>
 		<div class="modal__galery">
 				
-			<p>photo</p>
-			<input type="text">
-			<p>photo</p>
-			<p>photo</p>
-			<p>photo</p>
-			<p>photo</p>
-			<p>photo</p>
-			<p>photo</p>
-			<input type="text">
-			<p>photo</p>
 		</div>
-		<input type="file" id="upload">
-			<label for="upload">dl</label>
-		<div class="modal__btn">
-			<button>ajouter une photo</button>
-			<a href="#" class="remove">
-				supprimer de la gallery
-			</a>
-		<!-- <div>
-		<input type="file" id="upload">
-		<label for="upload">dl</label>
-		-->
-		</div>	
+		<form class="formAddPhoto">
+			<div class="formAddPhoto__upload">
+				<label for="upload">dl</label>	
+				<input type="file" id="upload">
+			</div>
+			<div class="formAddPhoto__title">
+				<label for="title">Titre</label>
+				<input type="text" id="title" name="form__title">
+			</div>
+			<div class="formAddPhoto__categorie">
+				<label for="categorie">Categorie</label>
+				<select name="form__categorie" id="categorie">
+					<optgroup label="Categories">
+						<option value="vide"></option> 
+						<option value="Objet"> Objet</option> 
+						<option value="Appartement"> Appartement</option> 
+						<option value="Objet"> Objet</option> 
+					</select>
+					</optgroup>
+				</div>
+				<div class="formAddPhoto__submit">
+					<input type="submit" value="Valider">					
+				</div>	
+		</form>
 		</div> 
 </aside>
  <!-- fin modal --------------------------------->
