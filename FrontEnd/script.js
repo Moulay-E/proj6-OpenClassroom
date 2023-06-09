@@ -9,10 +9,10 @@ const object = document.querySelector(".portfolio__btn__object");
 const apartment = document.querySelector(".portfolio__btn__apartment");
 const hotel = document.querySelector(".portfolio__btn__hotel");
 
-let localToken;
+export let localToken;
 let categorieData;
 const categorieUrl = 'http://localhost:5678/api/categories';
-const workUrl = 'http://localhost:5678/api/works';
+export const workUrl = 'http://localhost:5678/api/works';
 
 //recovery data from the api and use them
 await fetchJson(categorieUrl)
@@ -67,4 +67,6 @@ async function tokenRecuperation() {
 
 await tokenRecuperation();
 await logout(localToken);
+
+
 

@@ -1,3 +1,5 @@
+import { fetchThemAll } from "./fetch.js";
+import { localToken, workUrl } from "../script.js";
 
 // close and open modal on click 
 export let modal = null;
@@ -134,21 +136,106 @@ window.addEventListener("keydown", function(e){
   }
   addImageModal();
 
+  async function addImageServ(url, dataToPost){
+    
+    let test=  await fetchThemAll(url,dataToPost);
+    console.log(test);
+
+}
+
   function validerImgs(){
     const formElem = document.querySelector(".formAddPhoto");
     formElem.addEventListener("submit", e =>{
         e.preventDefault();
-
-        const dataForm = new FormData(formElem);
-        const data = Object.fromEntries(dataForm);
-
+        // const dataForm = new FormData(formElem);
+        const data = new FormData();
+        // const data = Object.fromEntries(dataForm);
+        
+        
+        const title = document.querySelector('#title');
+        const cate = document.querySelector("#categorie")
         const imgInput = document.querySelector("#upload");
         const imagefile = imgInput.files[0];
-        data.image = imagefile;
+        
+        data.append("image", imagefile);
+        data.append("title", title.value);
+        data.append("category", cate.value);
+
+        // const imgInput = document.querySelector("#upload");
+        // const imagefile = imgInput.files[0];
+        // data.image = imagefile;
         console.log(data);
+        // console.log(data.form__title)
+
+        // const imageToPost = {
+        //     "title": data.form__title,
+        //     "imageUrl": data.image,
+        //     "categoryId": data.form__categorie,
+        //   }
+
+        //   console.log(imageToPost, 'hoho')
+          const tokenString = localStorage.getItem('Token');
+          console.log(tokenString,"token extrait");
+        //   console.log(imageToPost,"le body");
+
+          const imageFetchPara = {
+            method: "POST",
+            headers: {
+                // "Content-Type": "application/json",
+                // Accept: 'application/json',
+                Authorization: `Bearer ${tokenString}`,
+            },
+            body: data,
+          };
+          
+
+        addImageServ(workUrl, imageFetchPara);
+
     })
   }
   validerImgs()
+function test() {
+    const imageToPost = {
+        "title": "bblbllb",
+        "imageUrl": "shfsjfjsls",
+        "categoryId": "hshjhskhfks",
+      }
+      const tokenString = 
+      {"userId":1,"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY4NjMwNzgwNywiZXhwIjoxNjg2Mzk0MjA3fQ.zResFeDpEDK8u4fo785N4YdK1C5_glhKbhP6ORIsetc"} ;
+    //   localStorage.getItem('Token');
+    const testPara = {
+      method: "POST",
+      headers: {
+          Authorization: `Bearer ${tokenString}`,
+      },
+      body: imageToPost,
+    };
+    addImageServ('http://localhost:5678/api/works', testPara).then((response)=>{
+        console.log(response)
+    })
+
+}
+ test();
+
+//   async function getTokenFromLocalStorage() {
+//     return new Promise((resolve, reject) => {
+//       const token = localStorage.getItem("Token");
+//       resolve(token);
+//     })
+//   };
+//   async function tokenRecuperation() {
+//     const token = await getTokenFromLocalStorage();
+//     localToken = token;
+//     console.log(localToken, 'string');
+//   }
+//     let Token = await getTokenFromLocalStorage()
+//     console.log(Token, 'hihi');
+//   S0phie
+// async function tokk(test){
+// let tokens = await localToken;
+//     console.log(tokens);
+// }
+// tokk(localToken);
 // });
 // const gallery = document.querySelector(classe);
             
@@ -164,3 +251,4 @@ window.addEventListener("keydown", function(e){
 // figure.appendChild(img);
 // figure.appendChild(figTxt);
 // gallery.appendChild(figure);
+
