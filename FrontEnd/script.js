@@ -61,7 +61,7 @@ function getTokenFromLocalStorage() {
 // login and logout use fonction from login.js
 async function tokenRecuperation() {
   const token = await getTokenFromLocalStorage();
-  localToken = token;
+  localToken = token.replace(/"/g, '');
   console.log(localToken, 'string');
 }
 

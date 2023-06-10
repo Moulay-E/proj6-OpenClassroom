@@ -4,7 +4,7 @@ export async function fetchThemAll(url, option = {}) {
         const response = await fetch(url, {
             method: option.method || "GET",
             headers: option.headers || {},
-            body: option.body || null,
+            body: option.body || null
           
         });
         return response;

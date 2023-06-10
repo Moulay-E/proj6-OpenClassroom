@@ -143,79 +143,72 @@ window.addEventListener("keydown", function(e){
 
 }
 
-  function validerImgs(){
+function validerImgs() {
     const formElem = document.querySelector(".formAddPhoto");
-    formElem.addEventListener("submit", e =>{
-        e.preventDefault();
-        // const dataForm = new FormData(formElem);
-        const data = new FormData();
-        // const data = Object.fromEntries(dataForm);
-        
-        
-        const title = document.querySelector('#title');
-        const cate = document.querySelector("#categorie")
-        const imgInput = document.querySelector("#upload");
-        const imagefile = imgInput.files[0];
-        
-        data.append("image", imagefile);
-        data.append("title", title.value);
-        data.append("category", cate.value);
+    formElem.addEventListener("submit", async (e) => {
+      e.preventDefault();
+  
+      const title = document.querySelector('#title').value;
+      const cate = document.querySelector("#categorie").value;
+      const imgInput = document.querySelector("#upload");
+      const imagefile = imgInput.files[0];
+  
+      const data = new FormData();
+      data.append("imageUrl", imagefile);
+      data.append("title", title);
+      data.append("categoryId", cate);
+  
+      const tokenWait = localStorage.getItem('Token');
+      const tokenString = tokenWait.replace(/"/g, '');
+      console.log(tokenWait, 'post');
 
-        // const imgInput = document.querySelector("#upload");
-        // const imagefile = imgInput.files[0];
-        // data.image = imagefile;
-        console.log(data);
-        // console.log(data.form__title)
-
-        // const imageToPost = {
-        //     "title": data.form__title,
-        //     "imageUrl": data.image,
-        //     "categoryId": data.form__categorie,
-        //   }
-
-        //   console.log(imageToPost, 'hoho')
-          const tokenString = localStorage.getItem('Token');
-          console.log(tokenString,"token extrait");
-        //   console.log(imageToPost,"le body");
-
-          const imageFetchPara = {
-            method: "POST",
-            headers: {
-                // "Content-Type": "application/json",
-                // Accept: 'application/json',
-                Authorization: `Bearer ${tokenString}`,
-            },
-            body: data,
-          };
-          
-
-        addImageServ(workUrl, imageFetchPara);
-
-    })
-  }
-  validerImgs()
-function test() {
-    const imageToPost = {
-        "title": "bblbllb",
-        "imageUrl": "shfsjfjsls",
-        "categoryId": "hshjhskhfks",
+      const imageFetchPara = {
+        method: "POST",
+        headers: {
+          'Authorization': `Bearer ${tokenString}`
+        },
+        body: data,
+      };
+  
+      const url = 'http://localhost:5678/api/works';
+      const response = await fetchThemAll(url, imageFetchPara);
+  
+      if (response.ok) {
+        // Le formulaire a été envoyé avec succès
+        console.log('Formulaire envoyé avec succès');
+        // Fais ici ce que tu veux après l'envoi du formulaire, par exemple, affiche un message de succès ou effectue une redirection.
+      } else {
+        // Il y a eu une erreur lors de l'envoi du formulaire
+        console.log('Erreur lors de l\'envoi du formulaire');
+        // Gère l'erreur de la manière appropriée, par exemple, affiche un message d'erreur à l'utilisateur.
       }
-      const tokenString = 
-      {"userId":1,"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY4NjMwNzgwNywiZXhwIjoxNjg2Mzk0MjA3fQ.zResFeDpEDK8u4fo785N4YdK1C5_glhKbhP6ORIsetc"} ;
-    //   localStorage.getItem('Token');
-    const testPara = {
-      method: "POST",
-      headers: {
-          Authorization: `Bearer ${tokenString}`,
-      },
-      body: imageToPost,
-    };
-    addImageServ('http://localhost:5678/api/works', testPara).then((response)=>{
-        console.log(response)
-    })
+    });
+  }
+  
+  validerImgs()
+// function test() {
+//     const imageToPost = {
+//         "id": 0,
+//         "title": "string",
+//         "imageUrl": "string",
+//         "categoryId": "string",
+//         "userId": 0
+//       }
+//       const tokenString = 
+//       {userId:1,token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY4NjMzNDI0OSwiZXhwIjoxNjg2NDIwNjQ5fQ.jcFBL0wSr_saix8wXl0j3xwV3lB7GIMslA5EOd4ek8c"};            const testPara = {
+//       method: "POST",
+//       headers: {
+//         'Content-Type': 'application/json',    
+//         'Authorization': `Bearer ${tokenString}`
+//       },
+//       body: JSON.stringify(imageToPost),
+//     };
+//     addImageServ('http://localhost:5678/api/works', testPara).then((response)=>{
+//         console.log(response)
+//     })
 
-}
- test();
+// }
+//  test();
 
 //   async function getTokenFromLocalStorage() {
 //     return new Promise((resolve, reject) => {

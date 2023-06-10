@@ -73,7 +73,7 @@ LoginForm?.addEventListener("submit", function (event) {
     return response.json();
   })
   .then((response)=> {
-    tokens = response
+    tokens = response.token
     console.log(tokens);
     AutorisationLogin(status);
     return tokens;
