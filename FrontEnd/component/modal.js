@@ -146,46 +146,187 @@ window.addEventListener("keydown", function(e){
 function validerImgs() {
     const formElem = document.querySelector(".formAddPhoto");
     formElem.addEventListener("submit", async (e) => {
+      
       e.preventDefault();
-  
+      const data = new FormData(formElem);
+      // const dataForm = new FormData(formElem);
+      // const data = Object.fromEntries(dataForm);
       const title = document.querySelector('#title').value;
       const cate = document.querySelector("#categorie").value;
       const imgInput = document.querySelector("#upload");
       const imagefile = imgInput.files[0];
+
+      // const fileImg = fileInput.files[0];
+      const titleImg = title.value;
+      const categoryImg = cate.value;
   
-      const data = new FormData();
-      data.append("imageUrl", imagefile);
-      data.append("title", title);
-      data.append("categoryId", cate);
-  
+   
+      data.append("image", imagefile);
+      data.append("title", titleImg);
+      data.append("category", categoryImg);
+      // data.image = imagefile;
+  console.dir(data);
+  console.log(data.entries());
+  console.log(data.category);
+
+
+
+      //  const imageToPost = {
+      //       "title": data.form__title,
+      //       "imageUrl": data.image,
+      //       "categoryId": data.form__categorie,
+      //     };
+          // console.log(imageToPost)
+          // JSON.stringify(imageToPost);
       const tokenWait = localStorage.getItem('Token');
-      const tokenString = tokenWait.replace(/"/g, '');
+      const tokenString = tokenWait.replace(/"/g,'');
       console.log(tokenWait, 'post');
 
-      const imageFetchPara = {
-        method: "POST",
-        headers: {
-          'Authorization': `Bearer ${tokenString}`
-        },
-        body: data,
-      };
-  
-      const url = 'http://localhost:5678/api/works';
-      const response = await fetchThemAll(url, imageFetchPara);
-  
-      if (response.ok) {
-        // Le formulaire a été envoyé avec succès
-        console.log('Formulaire envoyé avec succès');
-        // Fais ici ce que tu veux après l'envoi du formulaire, par exemple, affiche un message de succès ou effectue une redirection.
-      } else {
-        // Il y a eu une erreur lors de l'envoi du formulaire
-        console.log('Erreur lors de l\'envoi du formulaire');
-        // Gère l'erreur de la manière appropriée, par exemple, affiche un message d'erreur à l'utilisateur.
-      }
-    });
+      // const imageFetchPara = {
+      //   method: "POST",
+      //   headers: {
+      //       "Accept": "application/json",
+      //       "Content-Type": "multipart/form-data",
+      //       'Authorization': `Bearer ${tokenString}`
+      //   },
+      //   body: data,
+      // };
+
+
+      // const getPostItemApi = async (formData) => {
+      //   try {
+      //     const response = await fetch("http://localhost:5678/api/works", {
+      //       method: "POST",
+      //       headers: {
+      //         Authorization: `Bearer ${tokenString}`,
+      //       },
+      //       body:  formData,
+      //     });
+
+      //   } catch (error) {
+      //     console.log(error);
+      //   }
+      // };
+      const getPostItemApi = async (imageToPost) => {
+        try {
+          const response = await fetch("http://localhost:5678/api/works", {
+            method: "POST",
+            headers: {
+              
+              Authorization: `Bearer ${tokenString}`,
+            },
+            body: imageToPost,
+          });
+          // debugger
+          // e.preventDefault();
+        }
+
+catch (error) {
+    console.log(error);
   }
+};
+getPostItemApi(data);
+
   
-  validerImgs()
+    //   const url = 'http://localhost:5678/api/works';
+    //   const response = await fetchThemAll(url, imageFetchPara);
+  
+    //   if (response.ok) {
+    //     // Le formulaire a été envoyé avec succès
+    //     console.log('Formulaire envoyé avec succès');
+    //     // Fais ici ce que tu veux après l'envoi du formulaire, par exemple, affiche un message de succès ou effectue une redirection.
+    //   } else {
+    //     // Il y a eu une erreur lors de l'envoi du formulaire
+    //     console.log('Erreur lors de l\'envoi du formulaire');
+    //     // Gère l'erreur de la manière appropriée, par exemple, affiche un message d'erreur à l'utilisateur.
+    //   }
+    });
+  };
+  validerImgs();
+
+//   function testPost(){
+//     const tokenWait = localStorage.getItem('Token');
+//     const tokenString = tokenWait.replace(/"/g,'');
+//     const btn = document.querySelector(".editor__btn");
+//     btn.addEventListener('click', (e)=>{
+//         e.preventDefault();
+
+//         const imageToPost = 
+//             {
+//                 "imageUrl": '@peti.png;type=image/png' ,
+//                 "title":'dd' ,
+//                 "categoryId": '1'
+//               } ;
+        
+
+
+//         const getPostItemApi = async (imageToPost) => {
+//             try {
+//               const response = await fetch("http://localhost:5678/api/works", {
+//                 method: "POST",
+//                 headers: {
+//                     "Accept": "application/json",
+//                     "Content-Type": "multipart/form-data",
+//                   'Authorization': `Bearer ${tokenString}`,
+//                 },
+//                 body:JSON.stringify(imageToPost),
+//               });
+//             }
+
+//     catch (error) {
+//         console.log(error);
+//       }
+//     };
+//      getPostItemApi(imageToPost);
+
+
+// })};
+//   testPost();
+
+  /// Données à envoyer dans le corps de la requête (au format JSON ici)
+// var requestBody = {
+//   // Vos données ici...
+// };
+
+// // En-tête de la requête (avec le token Bearer)
+// var headers = {
+//   'Authorization': 'Bearer votre_token',
+//   'Content-Type': 'application/json'
+// };
+
+// // Configuration de la requête
+// var requestOptions = {
+//   method: 'POST',
+//   headers: headers,
+//   body: JSON.stringify(requestBody)
+// };
+
+// Envoi de la requête
+// fetch('votre_url_du_serveur', requestOptions)
+//   .then(response => response.json())
+//   .then(data => {
+//     // Traitement de la réponse du serveur
+//     console.log(data);
+//   })
+//   .catch(error => {
+//     // Gestion des erreurs
+//     console.error('Erreur :', error);
+//   }); 
+
+          // JSON.stringify(imageToPost);
+        // const imageFetchPara = {
+        //     method: "POST",
+        //     headers: {
+        //       'Authorization': `Bearer ${tokenString}`
+        //     },
+        //     body: imageToPost,
+        //   };
+
+
+              
+        //   const url = 'http://localhost:5678/api/works';
+        //   fetchThemAll(url, imageFetchPara);
+
 // function test() {
 //     const imageToPost = {
 //         "id": 0,

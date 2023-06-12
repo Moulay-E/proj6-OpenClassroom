@@ -37,10 +37,10 @@
 		<div class="modal__galery">
 				
 		</div>
-		<form action="" class="formAddPhoto">
+		<form  class="formAddPhoto" >
 			<div class="formAddPhoto__upload">
 				<label for="upload">dl</label>	
-				<input type="file" id="upload">
+				<input type="file" id="upload" size="4000000">
 			</div>
 			<div class="formAddPhoto__title">
 				<label for="title">Titre</label>
@@ -50,10 +50,24 @@
 				<label for="categorie">Categorie</label>
 				<select name="form__categorie" id="categorie">
 					<optgroup label="Categories">
-						<option value="vide"></option> 
-						<option value= 1> Objet</option> 
-						<option value="Appartement"> Appartement</option> 
-						<option value="Objet"> Objet</option> 
+						<option value=""></option>
+                      <option id="1" class="categorie-select" value="Objets">
+                        Objets
+                      </option>
+                      <option
+                        id="2"
+                        class="categorie-select"
+                        value="Appartements"
+                      >
+                        Appartements
+                      </option>
+                      <option
+                        id="3"
+                        class="categorie-select"
+                        value="Hotels_Restaurants"
+                      >
+                        Hôtels & Restaurants
+                      </option>
 					</select>
 					</optgroup>
 				</div>
