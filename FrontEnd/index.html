@@ -9,89 +9,19 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
 </head>
 <body>
-	 <!-- modale------------------------------ -->
-	<aside class="editor">
-		<!-- the balise link is usfull in js-->
-		<a href="#">
-			<i href="#modal1" class="fas fa-edit js-modal" style="color: #ededed;"></i>
-			<h2 href="#modal1" class="js-modal">
-				mode édition
-			</h2>
-		</a> 
-		<button class="editor__btn">
-			publier les changements
-		</button>
-	</aside>	
-	
-<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="galery__photo" style="display:none;">
-	<div class="modal__container js-modal-stop">
-		<div class="modal__title">
-			<h2 id="galery__photo">
-				Galerie Photo
-			</h2>
-			<button class="js-modal-close"> fermer la boite modal</button>
-		</div>
-		<div class="modal__galery">
-				
-		</div>
-		<form  class="formAddPhoto" >
-			<div class="formAddPhoto__upload">
-				<label for="upload">dl</label>	
-				<input type="file" id="upload" size="4000000">
-			</div>
-			<div class="formAddPhoto__title">
-				<label for="title">Titre</label>
-				<input type="text" id="title" name="form__title">
-			</div>
-			<div class="formAddPhoto__categorie">
-				<label for="categorie">Categorie</label>
-				<select name="form__categorie" id="categorie">
-					<optgroup label="Categories">
-						<option value=""></option>
-                      <option id="1" class="categorie-select" value="Objets">
-                        Objets
-                      </option>
-                      <option
-                        id="2"
-                        class="categorie-select"
-                        value="Appartements"
-                      >
-                        Appartements
-                      </option>
-                      <option
-                        id="3"
-                        class="categorie-select"
-                        value="Hotels_Restaurants"
-                      >
-                        Hôtels & Restaurants
-                      </option>
-					</select>
-					</optgroup>
-				</div>
-				<div class="formAddPhoto__submit">
-					<input type="submit" value="Valider">					
-				</div>	
-		</form>
-		</div> 
-</aside>
- <!-- fin modal --------------------------------->
 <header>
 	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
 	<nav>
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<a href="./login.html">
-				<li>login</li>
-			</a>
+			<li>login</li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
 </header>
-
 <main>
 	<section id="introduction">
 		<figure>
@@ -104,15 +34,8 @@
 			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
 		</article>
 	</section>
-
 	<section id="portfolio">
 		<h2>Mes Projets</h2>
-		<div class=" portfolio__btn">
-			<button class="portfolio__btn__all">Tous</button>
-			<button class="portfolio__btn__object">Objets</button>
-			<button class="portfolio__btn__apartment">Appartement</button>
-			<button class="portfolio__btn__hotel">Hôtels & Restaurants</button>
-		</div>
 		<div class="gallery">
 			<figure>
 				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
@@ -182,6 +105,5 @@
 		</ul>
 	</nav>
 </footer>
-<script type="module" src="script.js" ></script>
 </body>
 </html>
