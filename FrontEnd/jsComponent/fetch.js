@@ -16,8 +16,8 @@ export async function fetchThemAll(url, option = {}) {
     }
 };
 // retrieves the json version of the api return
-export async function fetchJson (url){
-    const response = await fetchThemAll(url);
+export async function fetchThemAllJson (url,option ={}){
+    const response = await fetchThemAll(url,option);
     return response.json();
 
 }; 
