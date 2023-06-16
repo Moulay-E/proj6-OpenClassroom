@@ -1,3 +1,7 @@
+
+import { fetchThemAll,fetchThemAllJson } from "./jsComponent/fetch.js";
+import { galleryWork, workGallery } from "./jsComponent/gallery.js";
+
 // Const
 const gallery = document.querySelector(".gallery");
 const filtersContainer = document.querySelector(".filters-container");
@@ -31,7 +35,6 @@ let titleForm;
 
 let works = [];
 let categories = [];
-import { fetchThemAll,fetchThemAllJson } from "../jsComponent/fetch.js";
 
 // Fetch Works
 const fetchGet = async () => {
@@ -43,9 +46,9 @@ const fetchGet = async () => {
   console.log(works[2]);
 
   // Ajout des travaux
-  galleryWork(works);
+  galleryWork(works, gallery);
   // galleryWork(works,modalGallery,"éditer");
-  workGallery(works);
+  workGallery(works,modalGallery, deleteImage);
 };
 
 // Fetch Catégories
@@ -87,38 +90,9 @@ const fetchDelete = async (id) => {
   debugger
 };
 
-// Implémente les Images dans la gallery
-function galleryWork(works, classe = gallery, string = false) {
-  works.map((work) => {
-    const post = document.createElement("figure");
-    post.setAttribute("id", `${work.id}.`);
-    post.innerHTML = `
-    <img src=${work.imageUrl} alt="image de ${work.title}">
-    
-    <figcaption>${string ? string : work.title}</figcaption> 
-    <figcaption>${work.title}</figcaption> 
-    `;
-    classe.appendChild(post);
-  });
-}
 
-// Ajout de la gallery dans la modale
-function workGallery(works) {
-  works.map((work) => {
-    const workPost = document.createElement("figure");
-    workPost.setAttribute("id", `${work.id}`);
-    workPost.innerHTML = `
-    <div class="workgallery-container">
-      <i id="${work.id}"  class="fa-solid fa-trash-can trash-icon" ></i>
-      <img class="modal-image" src=${work.imageUrl} alt="image de ${work.title}">
-    </div>    
-    <figcaption>éditer</figcaption> 
-    `;
-    modalGallery.appendChild(workPost);
 
-    deleteImage(workPost);
-  });
-}
+
 
 // Créer les filtres
 function filtres(categories) {
@@ -129,12 +103,17 @@ function filtres(categories) {
   // Tranforme l'objet set en array
   const filtersArray = Array.from(filters);
   //Créer les éléments buttons
+  console.log(filtersArray);
   for (let i = 0; i < filtersArray.length; i++) {
     const filtre = document.createElement("button");
     filtre.classList.add(
       "filter-btn",
-      `${filtersArray[i].split(" ").join("")}`
+      `${filtersArray[i]
+        .replace(/\s+/g, '')
+        // .split(" ").join("")
+      }`
     );
+    console.log(filtersArray[i]);
     filtre.innerText = filtersArray[i];
     filtersContainer.appendChild(filtre);
   }
