@@ -350,18 +350,9 @@ display: block;
 	transition: opacity 0.4s ease-out, transform 0.4s ease-out;
 };
 
-/* .test {
-	font-family: 'Syne';
-    font-weight: 700;
-    color: white;
-    background-color: #1D6154;
-    margin: 2em auto;
-    width: 180px;
-    text-align: center;
-    border-radius: 60px;
-}; */
 
-.addPicture-btn {
+
+.portfolio__btn__hotel{
 	display: block;
 	width: 40%;
 	height: 36px;
@@ -377,8 +368,31 @@ display: block;
 	cursor: pointer;
 }
 
-
-  
-  
+ /* btn modal */
+.addPicture-btn{
+	display: block;
+	width: 40%;
+	height: 36px;
+	margin: 24px auto;
+	background-color: #1D6154;
+	border-radius: 60px;
+	border: none;
+	color: white;
+	font-family: 'Syne';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 17px;
+	cursor: pointer;
+}
+.delete-gallery{
+	font-family: 'Syne';
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 17px;
+	color: red;
+	text-align: center;
+	cursor: pointer;
+}
   
   
