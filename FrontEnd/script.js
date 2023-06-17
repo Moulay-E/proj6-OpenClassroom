@@ -95,6 +95,7 @@ function filtrer(btn,categorie, array){
   });
 
 //<---------------------LOGOUT & TOKEN------------------------------
+//a ranger nettoyer et trier
 token = localStorage.getItem('Token');
 console.log(token);
 const tokenValue = token.replace(/"/g,'');
@@ -116,6 +117,49 @@ let localToken;
 
 await tokenRecuperation();
 await logout(localToken);
+
+// gestion modal affiahe entre les deux modal
+// function showAddPictureModal() {
+//   const modal1 = document.querySelector(".modalUno");
+//   const modal2 = document.querySelector(".modal2");
+//   modal1.style.display = "none";
+//   modal2.style.display = "flex";
+// }
+// function changeModal(){
+//   const btnChange = document.querySelector(".addPicture-btn");
+//   btnChange.addEventListener("click", (e)=>{
+//     e.preventDefault();
+//     showAddPictureModal();
+//   })
+// };
+// changeModal();
+
+
+//<---------------------changement modal------------------------------
+
+let isModal1Visible = true;
+const modal1 = document.querySelector(".modalUno");
+const modal2 = document.querySelector(".modal2");
+
+
+function toggleModals() {
+  if (isModal1Visible) {
+    modal1.style.display = "none";
+    modal2.style.display = "block";
+    isModal1Visible = false;
+  } else {
+    modal1.style.display = "grid";
+    modal2.style.display = "none";
+    isModal1Visible = true;
+  }
+};
+const clickElements = document.querySelectorAll(".changeModal");
+clickElements.forEach((element) => {
+  element.addEventListener("click", toggleModals);
+});
+//<---------------------changement modal------------------------------
+
+
 
 
 
@@ -147,6 +191,9 @@ const addImageModal = document.querySelector(".btn-addImage");
 const addPicture = document.querySelector(".addPictures");
 
 const imgContainer = document.querySelector(".img-container");
+
+
+
 
 
 

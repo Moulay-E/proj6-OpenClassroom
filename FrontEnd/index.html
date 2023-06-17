@@ -10,10 +10,10 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-	<link
+	<!-- <link
 	href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
 	rel="stylesheet"
-  />
+  /> -->
 </head>
 <body>
 	 <!-- modale------------------------------ -->
@@ -32,54 +32,38 @@
 	
 <aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="galery__photo" style="display:none;">
 	<div class="modal__container js-modal-stop">
-		<div class="modal__title">
-			<h2 id="galery__photo">
-				Galerie Photo
-			</h2>
-			<button class="js-modal-close"> fermer la boite modal</button>
-		</div>
-		<div class="modal__galery">
-				
-		</div>
-		<!-- <form  class="formAddPhoto" >
-			<div class="formAddPhoto__upload">
-				<label for="upload">dl</label>	
-				<input type="file" id="upload" size="4000000">
-			</div>
-			<div class="formAddPhoto__title">
-				<label for="title">Titre</label>
-				<input type="text" id="title" name="form__title">
-			</div>
-			<div class="formAddPhoto__categorie">
-				<label for="categorie">Categorie</label>
-				<select name="form__categorie" id="categorie">
-					<optgroup label="Categories">
-						<option value=""></option>
-                      <option id="1" class="categorie-select" value="Objets">
-                        Objets
-                      </option>
-                      <option
-                        id="2"
-                        class="categorie-select"
-                        value="Appartements"
-                      >
-                        Appartements
-                      </option>
-                      <option
-                        id="3"
-                        class="categorie-select"
-                        value="Hotels_Restaurants"
-                      >
-                        Hôtels & Restaurants
-                      </option>
-					</select>
-					</optgroup>
+
+		<!-- <div class="modal__container__gallery">
+			<button class="modal-trigger close-modal"></button>
+			<i class="fa-solid fa-xmark" style="color: #000000">
+				::before
+			</i>
+			<div class="pictures-gallery">
+				<h1 class="gallery-title">Galerie photo</h1>
+				<div class="modal-gallery">
+					
 				</div>
-				<div class="formAddPhoto__submit">
-					<input type="submit" value="Valider">					
-				</div>	
-		</form> -->
-		<form class="addPictures">
+				<button class="addPicture-btn">Ajouter une photo</button>
+				<p class="delete-gallery">Supprimer la galerie</p>
+			</div>
+		</div> -->
+		<div class="modalUno">
+			<div class="modal__title">
+				<h2 id="galery__photo">
+					Galerie Photo
+				</h2>
+				<button class="js-modal-close"> fermer la boite modal</button>
+			</div>
+			<div class="modal__galery">
+			</div>
+					<button class="addPicture-btn changeModal">Ajouter une photo</button>
+					<p class="delete-gallery">Supprimer la galerie</p>
+
+		</div>
+		
+
+		<form class="addPictures modal2" style="display:none;">
+			<i class="fas fa-arrow-left changeModal"></i>
 			<div class="addImage-container">
 			  <div class="img-container">
 				<i class="fa-regular fa-image image-icon"></i>
