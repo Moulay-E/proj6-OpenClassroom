@@ -1,7 +1,5 @@
 
-// import {filtrer,generationFigure, categorie} from "./component/filter.js";
 import { fetchThemAll, fetchJson } from "./component/fetch.js";
-// import { openModal, closeModal } from "./component/modal.js";
 import { logout} from "./component/login.js";
 
 const all = document.querySelector(".portfolio__btn__all");
@@ -21,18 +19,59 @@ function generationFigure(work, classe = ".gallery"){
   gallery.innerHTML="";
       work.map(works => {
           const figure = document.createElement("figure");
+          figure.setAttribute("id", `${work.id}.`);
           figure.innerHTML = 
           `<img src=${works.imageUrl} alt="image de ${works.title}>"
            <figcaption> ${works.title}</figcaption>`;
            gallery.appendChild(figure);
       })     
 };
+
+// function GenerateModalGallery(works) {
+//   const modalGallery = document.querySelector(".modal__galery");
+//   works.map((work) => {
+//     const workPost = document.createElement("figure");
+//     workPost.setAttribute("id", `${work.id}`);
+//     workPost.innerHTML = `
+//     <div class="workgallery-container">
+
+//       <i id="${work.id}"  class="fa-solid fa-trash-can trash-icon" ></i>
+//       <img class="modal-image" src=${work.imageUrl} alt="image de ${work.title}">
+//     </div>
+//       <figcaption>éditer</figcaption> 
+//     `;
+//     modalGallery.appendChild(workPost);
+
+//     deleteImage(workPost);
+//   });
+// }
+  const modalGallery = document.querySelector(".modal__galery");
+
+function workGallery(works) {
+  works.map((work) => {
+    const workPost = document.createElement("figure");
+    workPost.setAttribute("id", `${work.id}`);
+    workPost.innerHTML = `
+      <i id="${work.id}"  class="fa-solid fa-trash-can trash-icon" ></i>
+      <img class="modal-image" src=${work.imageUrl} alt="image de ${work.title}">
+    <figcaption>éditer</figcaption> 
+    `;
+    modalGallery.appendChild(workPost);
+
+    deleteImage(workPost);
+  });
+}
+
+
+
+
 //recovery data from the api and use them
 await fetchJson(workUrl)
 .then(work => {
   console.log(work , "www");
   generationFigure(work);
-  generationFigure(work, ".modal__galery")
+  workGallery(work);
+  // generationFigure(work, ".modal__galery")
 });
 
 //<----------------recovery and display of categories------------------------------
@@ -345,4 +384,98 @@ function addImage() {
 
 addImage();
 
+//<--------------------- Delete------------------------------
 
+// const fetchDelete = async (id) => {
+//   await fetch("http://" + window.location.hostname +":5678/api/works/" + id, {
+//     method: "DELETE",
+//     headers: {
+//       accept: "application/json",
+//       "Content-Type": "application/json",
+//       Authorization: `Bearer ${tokenValue}`,
+//     },
+//     mode: "cors",
+//   })    .then((response) => {
+//     if (response.ok) {
+//       // Suppression réussie, pas de contenu JSON à analyser
+//       id.remove();
+//     } else {
+//       // Suppression échouée, analyser la réponse en tant que JSON
+//       return response.json();
+//       debugger
+//     }
+//   })
+//   .then((res) => {
+//     console.log(res);
+//   })
+//   .catch((err) => console.log("Il y a eu une erreur sur le Fetch: " + err));
+//   debugger
+// };
+
+
+
+// function deleteImage(imgValue) {
+//   const deleteIcon = document.querySelectorAll(".trash-icon");
+//   deleteIcon.forEach((delIcon) => {
+//     delIcon.addEventListener("click", (e) => {
+//       e.preventDefault();
+//       const idRemove = document.getElementById(e.target.id);
+//       const portfolioRemove = document.getElementById(e.target.id + ".");
+//       fetchDelete(parseInt(e.target.id));
+//       console.log(e.target.id);
+//       idRemove.remove();
+//       portfolioRemove.remove();
+//       deleteMsg.innerText = "Supprimé !";
+//       setTimeout(() => {
+//         deleteMsg.innerText = "";
+//       }, 3000);
+//     });
+//   });
+// }
+
+
+const fetchDelete = async (id) => {
+  try {
+    const response = await fetch(`http://${window.location.hostname}:5678/api/works/${id}`, {
+      method: "DELETE",
+      headers: {
+        accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${tokenValue}`,
+      },
+      mode: "cors",
+    });
+
+    if (!response.ok) {
+      throw new Error("La suppression a échoué.");
+    }
+  } catch (error) {
+    console.log("Il y a eu une erreur sur le Fetch: " + error);
+  }
+};
+
+
+
+
+function deleteImage(imgValue) {
+  const deleteIcon = document.querySelectorAll(".trash-icon");
+  deleteIcon.forEach((delIcon) => {
+    delIcon.addEventListener("click", async (e) => {
+      e.preventDefault();
+      const id = parseInt(e.target.id);
+      const idRemove = document.getElementById(e.target.id);
+      const portfolioRemove = document.getElementById(e.target.id + ".");
+      try {
+        await fetchDelete(id);
+        idRemove.parentNode.removeChild(idRemove); // Supprimer l'élément du DOM
+        portfolioRemove.remove();
+        deleteMsg.innerText = "Supprimé !";
+        setTimeout(() => {
+          deleteMsg.innerText = "";
+        }, 3000);
+      } catch (err) {
+        console.log(err);
+      }
+    });
+  });
+}

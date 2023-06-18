@@ -14,17 +14,23 @@
 	href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
 	rel="stylesheet"
   /> -->
+  <script
+  src="https://kit.fontawesome.com/2a4ae6f608.js"
+  crossorigin="anonymous"
+></script>
 </head>
 <body>
 	 <!-- modale------------------------------ -->
 	<aside class="editor">
 		<!-- the balise link is usfull in js-->
-		<a href="#">
-			<i href="#modal1" class="fas fa-edit js-modal" style="color: #ededed;"></i>
-			<h2 href="#modal1" class="js-modal">
-				mode édition
-			</h2>
-		</a> 
+		<div class="editor__mode">
+			<a href="#">
+				<i href="#modal1" class="fas fa-edit js-modal" style="color: #ededed;"></i>
+				<h2 href="#modal1" class="js-modal">
+					mode édition
+				</h2>
+			</a> 
+		</div>
 		<button class="editor__btn">
 			publier les changements
 		</button>
@@ -52,6 +58,7 @@
 				<h2 id="galery__photo">
 					Galerie Photo
 				</h2>
+				<p class="delete-msg"></p>
 				<button class="js-modal-close"> fermer la boite modal</button>
 			</div>
 			<div class="modal__galery">
@@ -143,10 +150,10 @@
 	<section id="portfolio">
 		<h2>Mes Projets</h2>
 		<div class=" portfolio__btn">
-			<button class="portfolio__btn__all">Tous</button>
-			<button class="portfolio__btn__object">Objets</button>
-			<button class="portfolio__btn__apartment">Appartement</button>
-			<button class="portfolio__btn__hotel">Hôtels & Restaurants</button>
+			<button class="portfolio__btn__all portfolio__btn--style" >Tous</button>
+			<button class="portfolio__btn__object portfolio__btn--style">Objets</button>
+			<button class="portfolio__btn__apartment portfolio__btn--style">Appartement</button>
+			<button class="portfolio__btn__hotel portfolio__btn--style">Hôtels & Restaurants</button>
 		</div>
 		<div class="gallery">
 			<figure>
