@@ -1,4 +1,4 @@
-import { fetchThemAll,fetchJson } from "./fetch.js";
+import { fetchThemAll,fetchJson } from "../lib/fetch.js";
 
 export let tokens;
 export let status;
@@ -47,7 +47,8 @@ LoginForm?.addEventListener("submit", function (event) {
         let parsedLocal = JSON.parse(local);
         console.log(local, 'string');
         console.log(parsedLocal, 'parsed');
-        window.location.assign("http://127.0.0.1:5501/FrontEnd/index.html");
+        // window.location.assign("http://127.0.0.1:5501/FrontEnd/index.html");
+        window.location.href = "index.html";
       },
       default: () => {
         error.style.display = "block";

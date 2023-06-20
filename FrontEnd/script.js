@@ -1,11 +1,15 @@
 
-import { fetchThemAll, fetchJson } from "./component/fetch.js";
+import { fetchThemAll, fetchJson } from "./lib/fetch.js";
 import { logout} from "./component/login.js";
 
 const all = document.querySelector(".portfolio__btn__all");
 const object = document.querySelector(".portfolio__btn__object");
 const apartment = document.querySelector(".portfolio__btn__apartment");
 const hotel = document.querySelector(".portfolio__btn__hotel");
+
+const gallery = document.querySelector(".gallery");
+
+const errorAdd = document.querySelector(".error-add");
 
 let token;
 let categorieData;
@@ -14,12 +18,14 @@ export const workUrl = 'http://localhost:5678/api/works';
 
 //<----------------recovery and display of work------------------------------
 
-function generationFigure(work, classe = ".gallery"){
-  const gallery = document.querySelector(classe);
+function generationFigure(work
+  //  classe = ".gallery"
+   ){
+  // const gallery = document.querySelector(classe);
   gallery.innerHTML="";
       work.map(works => {
           const figure = document.createElement("figure");
-          figure.setAttribute("id", `${work.id}.`);
+          figure.setAttribute("id", `${works.id}.`);
           figure.innerHTML = 
           `<img src=${works.imageUrl} alt="image de ${works.title}>"
            <figcaption> ${works.title}</figcaption>`;

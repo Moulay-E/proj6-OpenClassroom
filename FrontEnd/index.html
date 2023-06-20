@@ -39,27 +39,13 @@
 <aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="galery__photo" style="display:none;">
 	<div class="modal__container js-modal-stop">
 
-		<!-- <div class="modal__container__gallery">
-			<button class="modal-trigger close-modal"></button>
-			<i class="fa-solid fa-xmark" style="color: #000000">
-				::before
-			</i>
-			<div class="pictures-gallery">
-				<h1 class="gallery-title">Galerie photo</h1>
-				<div class="modal-gallery">
-					
-				</div>
-				<button class="addPicture-btn">Ajouter une photo</button>
-				<p class="delete-gallery">Supprimer la galerie</p>
-			</div>
-		</div> -->
 		<div class="modalUno">
 			<div class="modal__title">
 				<h2 id="galery__photo">
 					Galerie Photo
 				</h2>
 				<p class="delete-msg"></p>
-				<button class="js-modal-close"> fermer la boite modal</button>
+				<button class="js-modal-close">X</button>
 			</div>
 			<div class="modal__galery">
 			</div>
@@ -117,6 +103,7 @@
 
 			<button type="submit" class="validate-btn">Valider</button>
 		  </form>
+		  <p class="error-add"></p>
 		</div> 
 </aside>
  <!-- fin modal --------------------------------->
@@ -148,7 +135,14 @@
 	</section>
 
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<div class="portfolio__project">
+			<h2>Mes Projets</h2>
+			<div class="portfolio__project__edit">
+				<i class="far fa-edit"></i>
+				<h4>modifier</h4>
+			</div>
+		</div>
+		
 		<div class=" portfolio__btn">
 			<button class="portfolio__btn__all portfolio__btn--style" >Tous</button>
 			<button class="portfolio__btn__object portfolio__btn--style">Objets</button>
