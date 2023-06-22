@@ -1,27 +1,19 @@
 
-import { fetchThemAll, fetchJson } from "./lib/fetch.js";
-import { logout} from "./component/login.js";
+import { fetchJson } from "./lib/fetch.js";
 
-const all = document.querySelector(".portfolio__btn__all");
+const allBtn = document.querySelector(".portfolio__btn__all");
 const object = document.querySelector(".portfolio__btn__object");
 const apartment = document.querySelector(".portfolio__btn__apartment");
 const hotel = document.querySelector(".portfolio__btn__hotel");
 
-const gallery = document.querySelector(".gallery");
-
 const errorAdd = document.querySelector(".error-add");
 
-let token;
-let categorieData;
 const categorieUrl = 'http://localhost:5678/api/categories';
 export const workUrl = 'http://localhost:5678/api/works';
 
 //<----------------recovery and display of work------------------------------
-
-function generationFigure(work
-  //  classe = ".gallery"
-   ){
-  // const gallery = document.querySelector(classe);
+const gallery = document.querySelector(".gallery");
+function generationFigure(work){
   gallery.innerHTML="";
       work.map(works => {
           const figure = document.createElement("figure");
@@ -33,26 +25,8 @@ function generationFigure(work
       })     
 };
 
-// function GenerateModalGallery(works) {
-//   const modalGallery = document.querySelector(".modal__galery");
-//   works.map((work) => {
-//     const workPost = document.createElement("figure");
-//     workPost.setAttribute("id", `${work.id}`);
-//     workPost.innerHTML = `
-//     <div class="workgallery-container">
-
-//       <i id="${work.id}"  class="fa-solid fa-trash-can trash-icon" ></i>
-//       <img class="modal-image" src=${work.imageUrl} alt="image de ${work.title}">
-//     </div>
-//       <figcaption>éditer</figcaption> 
-//     `;
-//     modalGallery.appendChild(workPost);
-
-//     deleteImage(workPost);
-//   });
-// }
-  const modalGallery = document.querySelector(".modal__galery");
-
+/////////////////////////////////////////////////////////////////
+const modalGallery = document.querySelector(".modal__galery");
 function workGallery(works) {
   works.map((work) => {
     const workPost = document.createElement("figure");
@@ -67,36 +41,34 @@ function workGallery(works) {
     deleteImage(workPost);
   });
 }
-
-
-
-
 //recovery data from the api and use them
-await fetchJson(workUrl)
-.then(work => {
-  console.log(work , "www");
-  generationFigure(work);
-  workGallery(work);
-  // generationFigure(work, ".modal__galery")
-});
+async function fetchWorkGenerateGaleryAndModal(){
+  await fetchJson(workUrl)
+  .then(work => {
+    console.log(work , "www");
+    generationFigure(work);
+    workGallery(work);
+    // generationFigure(work, ".modal__galery")
+  });
+};
+fetchWorkGenerateGaleryAndModal();
 
 //<----------------recovery and display of categories------------------------------
 //use map to compare the different elements of the object to check
 // whether they exist in the array and assign them to the new object
+let categorieData;
 function categorie(array) {
   const mappings = {
     Objets: "obj",
     Appartements: "appt",
     "Hotels & restaurants": "hostel"
   };
-
   const result = {};
   array.map(element => {
     const propertyName = mappings[element.name];
     propertyName && (result[propertyName] = element.id);
     console.log(propertyName + result[propertyName]);
   });
-
   return result;
 };
 //recovery data from the api and use them
@@ -136,32 +108,53 @@ function filtrer(btn,categorie, array){
     filtrer(object, [obj],work );
     filtrer(apartment, [appt],work );
     filtrer(hotel, [hostel],work );
-    filtrer(all, [obj, appt, hostel],work );
+    filtrer(allBtn, [obj, appt, hostel],work );
   });
 
 //<---------------------LOGOUT & TOKEN------------------------------
 //a ranger nettoyer et trier
-token = localStorage.getItem('Token');
-console.log(token);
-const tokenValue = token.replace(/"/g,'');
-
-function getTokenFromLocalStorage() {
-  return new Promise((resolve, reject) => {
-    const token = localStorage.getItem("Token");
-    resolve(token);
-  });
-}
 
 // login and logout use fonction from login.js
-async function tokenRecuperation() {
-  const token = await getTokenFromLocalStorage();
-  localToken = token.replace(/"/g, '');
-  console.log(localToken, 'string');
-}
-let localToken;
+const formatTokenFromLocalStorage = () => 
+localStorage.getItem("Token") ? localStorage.getItem("Token").replace(/"/g, '') : null;
 
-await tokenRecuperation();
-await logout(localToken);
+let tokens = formatTokenFromLocalStorage(); 
+console.log(tokens)
+
+  function logout (tokens){
+    const modalOpening = document.querySelectorAll(".edit--display");  const editor = document.querySelector(".editor");
+  const btnContainer = document.querySelector(".portfolio__btn");
+  const headerUl = document.querySelector("header > nav > ul");
+  const logoutHtml = headerUl.children[2];
+  
+  function suppr (e){
+    e.preventDefault();
+    //style
+    modalOpening.forEach((modal) => {
+      modal.style.display = "none";
+    });
+    editor.style.setProperty("display", "none");
+    btnContainer.style.setProperty("display", "flex");
+    //
+    localStorage.removeItem("Token");
+    tokens = null;
+    console.log(tokens, "test")
+    logoutHtml.innerText = "login";
+    logoutHtml.removeEventListener("click", suppr);
+  }
+  if (tokens !== null && tokens !== undefined){
+    //style
+    modalOpening.forEach((modal) => {
+      modal.style.display = "flex";
+    });
+    editor.style.setProperty("display", "flex");
+    btnContainer.style.setProperty("display", "none");
+    //
+    logoutHtml.innerText = "Logout";
+    logoutHtml.addEventListener("click", suppr); 
+  }
+};
+logout(tokens);
 
 // manque a ajouter la suppression du token et ajout mode edition
 
@@ -199,20 +192,13 @@ const closeModal = (e) =>{
         modal.style.display = "none";
         modal = null;
     }, 500)
-    // modal.addEventListener("animationend", ()=> {
-    //     modal.style.display = "none";
-    //     modal = null;
-    // })
-    // modal.setAttribute("aria-hidden", true);
     modal.removeAttribute("aria-modal");
     modal.removeEventListener("click", closeModal);
     modal.querySelector(".js-modal-close")
     .removeEventListener("click",closeModal);
     modal.querySelector(".js-modal-stop")
-    .removeEventListener("click",stopPropagation);
-   
+    .removeEventListener("click",stopPropagation); 
 }
-
 const stopPropagation = (e) => {
     e.stopPropagation();
 }
@@ -253,17 +239,11 @@ window.addEventListener("keydown", function(e){
     }
 })
 
-
-
-
-
-
 //<---------------------changement de modal------------------------------
 
 let isModal1Visible = true;
 const modal1 = document.querySelector(".modalUno");
 const modal2 = document.querySelector(".modal2");
-
 
 function toggleModals() {
   if (isModal1Visible) {
@@ -280,28 +260,7 @@ const clickElements = document.querySelectorAll(".changeModal");
 clickElements.forEach((element) => {
   element.addEventListener("click", toggleModals);
 });
-//<---------------------changement modal------------------------------
-
-
-// //call to the fonction open modal in modal.js
-//   document.querySelectorAll(".js-modal")
-// .forEach(a => {
-//     a.addEventListener("click", openModal)
-// });
-
-
-
-
-
-
-
-
-// const tokenWait = localStorage.getItem('Token');
-// console.log(tokenWait);
-// const tokenValue = tokenWait.replace(/"/g,'');
-// let tokenValue = localStorage.token;
-
-
+//<-------------------- Add Image With Modal------------------------------
 
 let imageForm = "";
 let categoryForm = "";
@@ -314,11 +273,6 @@ const addImageModal = document.querySelector(".btn-addImage");
 const addPicture = document.querySelector(".addPictures");
 
 const imgContainer = document.querySelector(".img-container");
-
-
-
-
-
 
 
 function addImage() {
@@ -365,7 +319,7 @@ function addImage() {
           //Clear les galleries
           gallery.innerHTML = "";
           modalGallery.innerHTML = "";
-          fetchGet();
+          fetchWorkGenerateGaleryAndModal();
           addPicture.reset();
           previewImg.src = "";
           previewImg.style.setProperty("display", "none");
@@ -392,54 +346,6 @@ addImage();
 
 //<--------------------- Delete------------------------------
 
-// const fetchDelete = async (id) => {
-//   await fetch("http://" + window.location.hostname +":5678/api/works/" + id, {
-//     method: "DELETE",
-//     headers: {
-//       accept: "application/json",
-//       "Content-Type": "application/json",
-//       Authorization: `Bearer ${tokenValue}`,
-//     },
-//     mode: "cors",
-//   })    .then((response) => {
-//     if (response.ok) {
-//       // Suppression réussie, pas de contenu JSON à analyser
-//       id.remove();
-//     } else {
-//       // Suppression échouée, analyser la réponse en tant que JSON
-//       return response.json();
-//       debugger
-//     }
-//   })
-//   .then((res) => {
-//     console.log(res);
-//   })
-//   .catch((err) => console.log("Il y a eu une erreur sur le Fetch: " + err));
-//   debugger
-// };
-
-
-
-// function deleteImage(imgValue) {
-//   const deleteIcon = document.querySelectorAll(".trash-icon");
-//   deleteIcon.forEach((delIcon) => {
-//     delIcon.addEventListener("click", (e) => {
-//       e.preventDefault();
-//       const idRemove = document.getElementById(e.target.id);
-//       const portfolioRemove = document.getElementById(e.target.id + ".");
-//       fetchDelete(parseInt(e.target.id));
-//       console.log(e.target.id);
-//       idRemove.remove();
-//       portfolioRemove.remove();
-//       deleteMsg.innerText = "Supprimé !";
-//       setTimeout(() => {
-//         deleteMsg.innerText = "";
-//       }, 3000);
-//     });
-//   });
-// }
-
-
 const fetchDelete = async (id) => {
   try {
     const response = await fetch(`http://${window.location.hostname}:5678/api/works/${id}`, {
@@ -459,8 +365,6 @@ const fetchDelete = async (id) => {
     console.log("Il y a eu une erreur sur le Fetch: " + error);
   }
 };
-
-
 
 
 function deleteImage(imgValue) {

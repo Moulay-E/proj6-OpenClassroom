@@ -22,14 +22,11 @@
 <body>
 	 <!-- modale------------------------------ -->
 	<aside class="editor">
-		<!-- the balise link is usfull in js-->
-		<div class="editor__mode">
-			<a href="#">
-				<i href="#modal1" class="fas fa-edit js-modal" style="color: #ededed;"></i>
-				<h2 href="#modal1" class="js-modal">
+		<div class="editor__elements">
+				<i class="fas fa-edit editor__elements__i"></i>
+				<h2>
 					mode édition
 				</h2>
-			</a> 
 		</div>
 		<button class="editor__btn">
 			publier les changements
@@ -124,9 +121,17 @@
 <main>
 	<section id="introduction">
 		<figure>
-			<img src="./assets/images/sophie-bluel.png" alt="">
+			<img src="./assets/images/sophie-bluel.png" alt="">	
+			<figcaption class="figure__edit edit--display">
+				<i class="far fa-edit"></i>
+				<h4>modifier</h4>
+			</figcaption>
 		</figure>
 		<article>
+			<div class="article__edit edit--display">
+				<i class="far fa-edit"></i>
+				<h4>modifier</h4>
+			</div>
 			<h2>Designer d'espace</h2>
 			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
 			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
@@ -137,9 +142,9 @@
 	<section id="portfolio">
 		<div class="portfolio__project">
 			<h2>Mes Projets</h2>
-			<div class="portfolio__project__edit">
-				<i class="far fa-edit"></i>
-				<h4>modifier</h4>
+			<div class="portfolio__project__edit edit--display">
+				<i href="#modal1" class="far fa-edit js-modal"></i>
+				<h4 href="#modal1" class="js-modal">modifier</h4>
 			</div>
 		</div>
 		

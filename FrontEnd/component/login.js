@@ -1,7 +1,7 @@
-import { fetchThemAll,fetchJson } from "../lib/fetch.js";
+import { fetchThemAll } from "../lib/fetch.js";
 
-export let tokens;
-export let status;
+let token;
+let status;
 let url = "http://localhost:5678/api/users/login";
 
 const autentification = {
@@ -42,7 +42,7 @@ LoginForm?.addEventListener("submit", function (event) {
         error.style.display = "none";
         email.classList.remove("errrorAnimation");
         pass.classList.remove("errrorAnimation");
-        localStorage.setItem("Token" , JSON.stringify(tokens));
+        localStorage.setItem("Token" , JSON.stringify(token));
         let local =  localStorage.getItem("Token");
         let parsedLocal = JSON.parse(local);
         console.log(local, 'string');
@@ -74,37 +74,18 @@ LoginForm?.addEventListener("submit", function (event) {
     return response.json();
   })
   .then((response)=> {
-    tokens = response.token
-    console.log(tokens);
+    token = response.token
+    console.log(token);
     AutorisationLogin(status);
-    return tokens;
+    return token;
   })
 });
-}
+};
 //login needs to be called after the 
 //fetch to get everything you need beforehand
 login();
 
-//use in the script in the index page
-//avoid using if/else
-export async function logout (localToken){
-  await Promise.resolve(localToken);
-  let headerUl = document.querySelector("header > nav > ul");
-  let logoutHtml = headerUl.children[2];
-  
 
-  function suppr (e){
-    e.preventDefault();
-    localStorage.removeItem("Token");
-    localToken = null;
-    logoutHtml.innerText = "login";
-    logoutHtml.removeEventListener("click", suppr);
-  }
-  if (localToken !== null && localToken !== undefined){
-    logoutHtml.innerText = "Logout";
-    logoutHtml.addEventListener("click", suppr); 
-  }
-};
 
 /*cette fonction prend un para le status
   elle crée un objet avec deux clef qui contiennent
