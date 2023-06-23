@@ -282,7 +282,7 @@ footer nav ul {
     border-radius: 60px;
     cursor: pointer;
 }
-
+ /*---------- Modal style------------- */
    .modal {
 	display: flex;
 	align-items: center;
@@ -296,13 +296,25 @@ footer nav ul {
 	animation: fadeIn .3s both;
    }
 .modal__container{
-	overflow: auto;
+	overflow-y: auto;
 	width: 600px;
 	max-width: calc(100vw - 20px);
 	max-height: calc(100vh - 20px);
 	background-color: aliceblue;
 	padding: 20px;
 	animation: slideFromTop .5s both;
+}
+.modal__title{
+	display: flex;
+	flex-direction: column;
+	height: 100px;
+}
+.close-modal-style{
+	display: flex!important;
+	justify-content: flex-end;
+}
+#galery__photo{
+	text-align: center;
 }
 .modal[aria-hidden ="true"]{
 	animation-name: fadeOut;
@@ -328,19 +340,29 @@ footer nav ul {
 	from{ transform: translateY(0);}
 	to{ transform: translateY(-50px);}
 }
-
-.modal__galery {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-column-gap: 20px;
-    grid-row-gap: 20px;
+.modal__gallery {
+	height: 70%;
+    width: 75%;
+    border-bottom: 1px solid #B3B3B3;
+    margin: auto;
 }
-.modal__galery > figure   {
+.modal__gallery__work {
+	position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 2fr 2fr 2fr 1fr;
+    grid-row-gap: 10px;
+    width: 100%;
+    height: 100%;
+	box-sizing: border-box;
+}
+.modal__gallery__work > figure   {
 	display: grid;
 }
-.modal__galery > figure > img{
+.modal__gallery__work > figure > img{
 	/* object-fit: cover; */
-	width: 180px;
+	width: 76px;
+	height: 102.57px;
 }
 
 .formAddPhoto{
@@ -571,4 +593,21 @@ display: block;
 	align-items: center;
     height: 50px;
     gap: 20px;
+}
+
+.close-modal-style{
+	cursor: pointer;
+}
+.validate-btn{
+	margin: 32px 0 0 30%;
+    background: #A7A7A7;
+    border-radius: 60px;
+    border: none;
+    width: 237px;
+    height: 36px;
+    color: white;
+    cursor: pointer;
+}
+.changeModal{
+	cursor: pointer;
 }

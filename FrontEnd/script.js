@@ -9,7 +9,7 @@ const hotel = document.querySelector(".portfolio__btn__hotel");
 const errorAdd = document.querySelector(".error-add");
 
 const categorieUrl = 'http://localhost:5678/api/categories';
-export const workUrl = 'http://localhost:5678/api/works';
+ const workUrl = 'http://localhost:5678/api/works';
 
 //<----------------recovery and display of work------------------------------
 const gallery = document.querySelector(".gallery");
@@ -26,7 +26,7 @@ function generationFigure(work){
 };
 
 /////////////////////////////////////////////////////////////////
-const modalGallery = document.querySelector(".modal__galery");
+const modalGallery = document.querySelector(".modal__gallery__work");
 function workGallery(works) {
   works.map((work) => {
     const workPost = document.createElement("figure");
@@ -38,6 +38,7 @@ function workGallery(works) {
     `;
     modalGallery.appendChild(workPost);
 
+    //u can find this fonction ligne 371
     deleteImage(workPost);
   });
 }
@@ -155,10 +156,6 @@ console.log(tokens)
   }
 };
 logout(tokens);
-
-// manque a ajouter la suppression du token et ajout mode edition
-
-
 
 //<---------------------MODAL BOX------------------------------
 
@@ -307,7 +304,7 @@ function addImage() {
       fetch("http://" + window.location.hostname +":5678/api/works", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${tokenValue}`,
+          Authorization: `Bearer ${tokens}`,
         },
         body: formData,
       })
@@ -353,7 +350,7 @@ const fetchDelete = async (id) => {
       headers: {
         accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: `Bearer ${tokenValue}`,
+        Authorization: `Bearer ${tokens}`,
       },
       mode: "cors",
     });
@@ -366,6 +363,7 @@ const fetchDelete = async (id) => {
   }
 };
 
+const deleteMsg = document.querySelector(".delete-msg");
 
 function deleteImage(imgValue) {
   const deleteIcon = document.querySelectorAll(".trash-icon");
@@ -379,9 +377,11 @@ function deleteImage(imgValue) {
         await fetchDelete(id);
         idRemove.parentNode.removeChild(idRemove); // Supprimer l'élément du DOM
         portfolioRemove.remove();
+        deleteMsg.style.setProperty("top", "0");
         deleteMsg.innerText = "Supprimé !";
         setTimeout(() => {
           deleteMsg.innerText = "";
+          deleteMsg.style.setProperty("top", "-25px");
         }, 3000);
       } catch (err) {
         console.log(err);
