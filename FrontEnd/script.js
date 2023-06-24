@@ -1,13 +1,6 @@
 
 import { fetchJson } from "./lib/fetch.js";
 
-const allBtn = document.querySelector(".portfolio__btn__all");
-const object = document.querySelector(".portfolio__btn__object");
-const apartment = document.querySelector(".portfolio__btn__apartment");
-const hotel = document.querySelector(".portfolio__btn__hotel");
-
-const errorAdd = document.querySelector(".error-add");
-
 const categorieUrl = 'http://localhost:5678/api/categories';
  const workUrl = 'http://localhost:5678/api/works';
 
@@ -57,6 +50,11 @@ fetchWorkGenerateGaleryAndModal();
 //<----------------recovery and display of categories------------------------------
 //use map to compare the different elements of the object to check
 // whether they exist in the array and assign them to the new object
+const allBtn = document.querySelector(".portfolio__btn__all");
+const object = document.querySelector(".portfolio__btn__object");
+const apartment = document.querySelector(".portfolio__btn__apartment");
+const hotel = document.querySelector(".portfolio__btn__hotel");
+
 let categorieData;
 function categorie(array) {
   const mappings = {
@@ -113,9 +111,7 @@ function filtrer(btn,categorie, array){
   });
 
 //<---------------------LOGOUT & TOKEN------------------------------
-//a ranger nettoyer et trier
 
-// login and logout use fonction from login.js
 const formatTokenFromLocalStorage = () => 
 localStorage.getItem("Token") ? localStorage.getItem("Token").replace(/"/g, '') : null;
 
@@ -268,9 +264,8 @@ const addCategorie = document.getElementById("add-categories");
 const previewImg = document.querySelector(".preview-img");
 const addImageModal = document.querySelector(".btn-addImage");
 const addPicture = document.querySelector(".addPictures");
-
 const imgContainer = document.querySelector(".img-container");
-
+const errorAdd = document.querySelector(".error-add");
 
 function addImage() {
   // Image
