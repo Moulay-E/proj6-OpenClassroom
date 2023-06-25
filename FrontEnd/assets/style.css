@@ -252,7 +252,6 @@ footer nav ul {
 	cursor: pointer;
 }
    /*------------ modal box -----------------------*/
-
   *:focus {
 	box-shadow: 0 0 5px blue;
   }
@@ -274,6 +273,10 @@ footer nav ul {
   }
 .editor__elements__i{
 	color: #ededed;
+}
+.editor__elements__h2{
+	color: white;
+	font-size: 16px;
 }
 .editor__btn{
 	background-color: white;

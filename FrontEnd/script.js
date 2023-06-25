@@ -1,4 +1,3 @@
-
 import { fetchJson } from "./lib/fetch.js";
 
 const categorieUrl = 'http://localhost:5678/api/categories';
@@ -80,9 +79,7 @@ await fetchJson(categorieUrl)
 
 //<---------------------FILTER Add Event on btn------------------------------
   // fetch data and launch filter function and button allocation
-// creates clickable btn and filters the array to create a new one
-// from this array, call the genererfigure function to 
-// to update the display according to the desired filter
+// from this array, call the genererfigure function to change the gallery 
 function filtrer(btn,categorie, array){
   btn.addEventListener("click",function(){
       const arrayFiltrer = array.filter(function(item){
@@ -111,7 +108,6 @@ function filtrer(btn,categorie, array){
   });
 
 //<---------------------LOGOUT & TOKEN------------------------------
-
 const formatTokenFromLocalStorage = () => 
 localStorage.getItem("Token") ? localStorage.getItem("Token").replace(/"/g, '') : null;
 
@@ -154,7 +150,6 @@ console.log(tokens)
 logout(tokens);
 
 //<---------------------MODAL BOX------------------------------
-
 let modal = null;
 const focusableSelector = "button, a , input, textarea";
 let focusables = [];
@@ -195,7 +190,6 @@ const closeModal = (e) =>{
 const stopPropagation = (e) => {
     e.stopPropagation();
 }
-
 document.querySelectorAll(".js-modal")
 .forEach(a => {
     a.addEventListener("click", openModal)
@@ -221,7 +215,6 @@ const focusInModal = (e) => {
     }
     focusables[index].focus();
 }
-
 window.addEventListener("keydown", function(e){
     console.log(e.key);
     if(e.key === "Escape" || e.key === "Esc" ){
@@ -233,7 +226,6 @@ window.addEventListener("keydown", function(e){
 })
 
 //<---------------------changement de modal------------------------------
-
 let isModal1Visible = true;
 const modal1 = document.querySelector(".modalUno");
 const modal2 = document.querySelector(".modal2");
@@ -253,8 +245,8 @@ const clickElements = document.querySelectorAll(".changeModal");
 clickElements.forEach((element) => {
   element.addEventListener("click", toggleModals);
 });
-//<-------------------- Add Image With Modal------------------------------
 
+//<-------------------- Add Image With Modal------------------------------
 let imageForm = "";
 let categoryForm = "";
 let titleForm;
@@ -266,7 +258,13 @@ const addImageModal = document.querySelector(".btn-addImage");
 const addPicture = document.querySelector(".addPictures");
 const imgContainer = document.querySelector(".img-container");
 const errorAdd = document.querySelector(".error-add");
+const submitBtn = document.querySelector(".validate-btn");
 
+function BtnValidateGreen(){
+  if (imageForm && titleForm && categoryForm) {
+    submitBtn.style.background ="#1D6154";
+    }
+};
 function addImage() {
   // Image
   addImageModal.addEventListener("input", (e) => {
@@ -276,14 +274,17 @@ function addImage() {
     previewImg.src = img;
     previewImg.style.setProperty("display", "block");
     imgContainer.style.setProperty("display", "none");
+    BtnValidateGreen();
   });
   //Titre
   addTitle.addEventListener("input", (e) => {
     titleForm = e.target.value;
+    BtnValidateGreen();
   });
   //Catégories
   addCategorie.addEventListener("input", (e) => {
     categoryForm = e.target.selectedIndex;
+    BtnValidateGreen();
   });
   //Submit
   addPicture.addEventListener("submit", (e) => {
@@ -295,7 +296,9 @@ function addImage() {
       formData.append("title", titleForm);
       formData.append("category", categoryForm);
       console.log(formData.entries());
-      //Fetch ajout des travaux
+
+      submitBtn.style.background ="#A7A7A7";
+      //Fetch add work
       fetch("http://" + window.location.hostname +":5678/api/works", {
         method: "POST",
         headers: {
@@ -308,7 +311,7 @@ function addImage() {
           console.log(res);
           errorAdd.innerText = "Posté !";
           errorAdd.style.color = "green";
-          //Clear les galleries
+          //Clear of gallery
           gallery.innerHTML = "";
           modalGallery.innerHTML = "";
           fetchWorkGenerateGaleryAndModal();
@@ -333,11 +336,9 @@ function addImage() {
     }
   });
 }
-
 addImage();
 
 //<--------------------- Delete------------------------------
-
 const fetchDelete = async (id) => {
   try {
     const response = await fetch(`http://${window.location.hostname}:5678/api/works/${id}`, {
@@ -370,7 +371,7 @@ function deleteImage(imgValue) {
       const portfolioRemove = document.getElementById(e.target.id + ".");
       try {
         await fetchDelete(id);
-        idRemove.parentNode.removeChild(idRemove); // Supprimer l'élément du DOM
+        idRemove.parentNode.removeChild(idRemove); 
         portfolioRemove.remove();
         deleteMsg.style.setProperty("top", "0");
         deleteMsg.innerText = "Supprimé !";
