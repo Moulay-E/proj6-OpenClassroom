@@ -1,5 +1,9 @@
 import { fetchJson } from "./lib/fetch.js";
 
+// Exemple de création d'un cookie avec SameSite=None et Secure
+document.cookie = "nomDuCookie=valeurDuCookie; SameSite=None; Secure";
+
+
 const categorieUrl = 'http://localhost:5678/api/categories';
  const workUrl = 'http://localhost:5678/api/works';
 
@@ -29,8 +33,6 @@ function workGallery(works) {
     <figcaption>éditer</figcaption> 
     `;
     modalGallery.appendChild(workPost);
-
-    //u can find this fonction ligne 371
     deleteImage(workPost);
   });
 }
@@ -41,7 +43,6 @@ async function fetchWorkGenerateGaleryAndModal(){
     console.log(work , "www");
     generationFigure(work);
     workGallery(work);
-    // generationFigure(work, ".modal__galery")
   });
 };
 fetchWorkGenerateGaleryAndModal();
@@ -54,21 +55,18 @@ const object = document.querySelector(".portfolio__btn__object");
 const apartment = document.querySelector(".portfolio__btn__apartment");
 const hotel = document.querySelector(".portfolio__btn__hotel");
 
+let filtre = new Set();
+
 let categorieData;
-function categorie(array) {
-  const mappings = {
-    Objets: "obj",
-    Appartements: "appt",
-    "Hotels & restaurants": "hostel"
-  };
-  const result = {};
-  array.map(element => {
-    const propertyName = mappings[element.name];
-    propertyName && (result[propertyName] = element.id);
-    console.log(propertyName + result[propertyName]);
+function categorieAddToSet(array) {
+  array.map((f)=> {
+    filtre.add(f)
   });
-  return result;
+  const filtrerdArray = Array.from(filtre);
+  console.log(filtrerdArray, " un test filtre")
+  return filtrerdArray;
 };
+
 //recovery data from the api and use them
 await fetchJson(categorieUrl)
 .then( data => {
@@ -96,15 +94,17 @@ function filtrer(btn,categorie, array){
     console.log("promise")
     const categorieData = data[0];
     const work = data[1];
-    console.dir(categorieData);
-    console.dir(work);
-   const {obj, appt, hostel} =  categorie(categorieData);
-   console.dir(obj +' '+ appt + ' '+  hostel);
+    const categorieResultArray = categorieAddToSet(categorieData);
+    const [obj, appt, hostel] = categorieResultArray;
+    
+    filtrer(object, [obj.id],work );
+    filtrer(apartment, [appt.id],work );
+    filtrer(hotel, [hostel.id],work );
+    filtrer(allBtn, [obj.id, appt.id, hostel.id],work );
 
-    filtrer(object, [obj],work );
-    filtrer(apartment, [appt],work );
-    filtrer(hotel, [hostel],work );
-    filtrer(allBtn, [obj, appt, hostel],work );
+    console.log("categorie: ", categorieData, ' work:' , work);
+    console.log(categorieResultArray,'result')
+    console.log(`${obj.id} ${appt.id} ${hostel.id}`, "destru");
   });
 
 //<---------------------LOGOUT & TOKEN------------------------------
@@ -118,7 +118,7 @@ console.log(tokens)
     const modalOpening = document.querySelectorAll(".edit--display");  const editor = document.querySelector(".editor");
   const btnContainer = document.querySelector(".portfolio__btn");
   const headerUl = document.querySelector("header > nav > ul");
-  const logoutHtml = headerUl.children[2];
+  const logoutHtml = headerUl.children[2].querySelector("a");
   
   function suppr (e){
     e.preventDefault();
@@ -194,34 +194,11 @@ document.querySelectorAll(".js-modal")
 .forEach(a => {
     a.addEventListener("click", openModal)
 });
-
-// navigat in the modal with keyborad
-const focusInModal = (e) => {
-    e.preventDefault();
-    let index = focusables.findIndex(
-        f => f === modal.querySelector(":focus"));
-    console.log(index);
-    if(e.shiftKey === true){
-        index--;
-    }
-    else{
-        index++;
-    }
-    if(index >= focusables.length){
-        index = 0;
-    }
-    if(index < 0){
-        index = focusables.length-1;
-    }
-    focusables[index].focus();
-}
+//out of the modal
 window.addEventListener("keydown", function(e){
     console.log(e.key);
     if(e.key === "Escape" || e.key === "Esc" ){
         closeModal(e);
-    }
-    if(e.key === "Tab" && modal !== null){
-        focusInModal(e);
     }
 })
 
@@ -361,18 +338,19 @@ const fetchDelete = async (id) => {
 
 const deleteMsg = document.querySelector(".delete-msg");
 
-function deleteImage(imgValue) {
+function deleteImage() {
   const deleteIcon = document.querySelectorAll(".trash-icon");
   deleteIcon.forEach((delIcon) => {
     delIcon.addEventListener("click", async (e) => {
       e.preventDefault();
       const id = parseInt(e.target.id);
-      const idRemove = document.getElementById(e.target.id);
-      const portfolioRemove = document.getElementById(e.target.id + ".");
+      const modalRemove = document.getElementById(e.target.id);
+      const galleryRemove = document.getElementById(e.target.id + ".");
       try {
         await fetchDelete(id);
-        idRemove.parentNode.removeChild(idRemove); 
-        portfolioRemove.remove();
+        // modalRemove.parentNode.removeChild(modalRemove);
+        modalRemove.remove();
+        galleryRemove.remove();
         deleteMsg.style.setProperty("top", "0");
         deleteMsg.innerText = "Supprimé !";
         setTimeout(() => {

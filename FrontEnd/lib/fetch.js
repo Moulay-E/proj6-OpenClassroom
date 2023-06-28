@@ -11,4 +11,19 @@ export async function fetchJson(url) {
       return error;
     }
   }
-  
+
+  export async function fetchLogin(url, option = {}) {
+    try {
+        const response = await fetch(url, {
+            method: option.method || "GET",
+            headers: option.headers || {},
+            body: option.body || null,
+        });
+        return response;
+    }
+    catch (error) {
+        const errorMessage = !response.ok ? error : "Erreur de la requête";
+        console.log(errorMessage);
+        return errorMessage;
+    }
+};

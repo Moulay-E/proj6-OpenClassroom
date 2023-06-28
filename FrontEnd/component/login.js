@@ -1,4 +1,4 @@
-import { fetchThemAll } from "../lib/fetch.js";
+import { fetchLogin } from "../lib/fetch.js";
 
 let token;
 let status;
@@ -66,7 +66,7 @@ LoginForm?.addEventListener("submit", function (event) {
     action();
   };
 
-  fetchThemAll(url,  loginParameter)
+  fetchLogin(url,  loginParameter)
   .then((response) => {
     console.log(response, "ce que sa devrait afficer");      
     status = response.status; 

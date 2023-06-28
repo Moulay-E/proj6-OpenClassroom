@@ -97,6 +97,7 @@ nav ul {
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+	cursor: pointer;
 }
 
 li:hover {
@@ -194,6 +195,11 @@ margin: auto;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+.contact__forgot-password{
+	text-align: center;
+	color: #3D3D3D;
+	text-decoration: underline;
+}
 
 input[type="submit"]{
 	font-family: 'Syne';
@@ -250,6 +256,10 @@ footer nav ul {
 	background: none;
 	transition: .4s ease-in-out;
 	cursor: pointer;
+}
+.portfolio__btn--style:focus {
+	color: #fff;
+	background-color: #1D6154;
 }
    /*------------ modal box -----------------------*/
   *:focus {
@@ -416,7 +426,7 @@ display: block;
 	left: 50%;
 	transform: translate(-50%, calc(-50% - 50px));
 	transition: opacity 0.4s ease-out, transform 0.4s ease-out;
-};
+}
 
 
 
