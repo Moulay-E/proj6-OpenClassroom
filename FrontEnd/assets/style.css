@@ -428,23 +428,6 @@ display: block;
 	transition: opacity 0.4s ease-out, transform 0.4s ease-out;
 }
 
-
-
-.portfolio__btn__hotel{
-	display: block;
-	width: 40%;
-	height: 36px;
-	margin: 24px auto;
-	background-color: #1D6154;
-	border-radius: 60px;
-	border: none;
-	color: white;
-	font-family: 'Syne', sans-serif;
-	font-weight: 700;
-	font-size: 14px;
-	line-height: 17px;
-	cursor: pointer;
-}
 .trash-icon{
 	position: absolute;
 	/* top: 6px;

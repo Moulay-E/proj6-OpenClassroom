@@ -4,10 +4,6 @@ let token;
 let status;
 let url = "http://localhost:5678/api/users/login";
 
-const autentification = {
-  email: "sophie.bluel@test.tld",
-  password: "S0phie",
-};
 
 //function that takes values entered by the user and stores them in an object
 function login(){
@@ -47,7 +43,6 @@ LoginForm?.addEventListener("submit", function (event) {
         let parsedLocal = JSON.parse(local);
         console.log(local, 'string');
         console.log(parsedLocal, 'parsed');
-        // window.location.assign("http://127.0.0.1:5501/FrontEnd/index.html");
         window.location.href = "index.html";
       },
       default: () => {
