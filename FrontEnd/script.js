@@ -39,7 +39,6 @@ async function fetchWorkGenerateGaleryAndModal() {
   await fetchJson(workUrl).then((work) => {
     generationFigure(work);
     generateModalGallery(work);
-    // console.log(work , " work on fetchWorkGenreate");
   });
 }
 fetchWorkGenerateGaleryAndModal();
@@ -62,7 +61,6 @@ function categorieAddToSet(array) {
   });
   const filtrerdArray = Array.from(filtre);
   return filtrerdArray;
-  // console.log(filtrerdArray, " un test filtre")
 }
 
 //recovery data from the api and use them
@@ -70,7 +68,6 @@ async function fetchCategory() {
   await fetchJson(categorieUrl).then((data) => {
     categorieData = data;
     return categorieData;
-    // console.log(categorieData, " categorie on fetchCategory");
   });
 }
 fetchCategory();
@@ -83,12 +80,11 @@ function filtrer(btn, categorie, array) {
       return categorie.includes(item.categoryId);
     });
     generationFigure(arrayFiltrer);
-    // console.log(arrayFiltrer+ " arrayFiltrer on filtrer");
+
   });
 }
 function fetchAndFilterData() {
   Promise.all([fetchJson(categorieUrl), fetchJson(workUrl)]).then((data) => {
-    console.log("promise");
     const categorieData = data[0];
     const work = data[1];
     const categorieResultArray = categorieAddToSet(categorieData);
@@ -99,9 +95,6 @@ function fetchAndFilterData() {
     filtrer(hotelBtn, [hostel.id], work);
     filtrer(allBtn, [obj.id, appt.id, hostel.id], work);
 
-    // console.log("categorie: ", categorieData, ' work:' , work);
-    // console.log(categorieResultArray,' categorieResultArray on fetchAndFilterData')
-    // console.log(`${obj.id} ${appt.id} ${hostel.id}`, "destructuration on fetchAndFilterData");
   });
 }
 fetchAndFilterData();
@@ -200,7 +193,6 @@ window.addEventListener("keydown", function (e) {
   if (e.key === "Escape" || e.key === "Esc") {
     closeModal(e);
   }
-  // console.log(e.key);
 });
 
 //<---------------------changement de modal------------------------------
@@ -271,8 +263,6 @@ function addImage() {
       formData.append("image", imageForm);
       formData.append("title", titleForm);
       formData.append("category", categoryForm);
-      // console.log(formData.entries());
-      // console.log(imageForm, titleForm, categoryForm);
 
       submitBtn.style.background = "#A7A7A7";
       //Fetch add work
@@ -285,12 +275,9 @@ function addImage() {
       })
         .then((response) => response.json())
         .then((res) => {
-          console.log(res);
           errorAdd.innerText = "Posté !";
           errorAdd.style.color = "green";
-          //Clear of gallery
-          // gallery.innerHTML = "";
-          // modalGallery.innerHTML = "";
+
           fetchWorkGenerateGaleryAndModal();
           fetchAndFilterData();
           addPicture.reset();
