@@ -215,7 +215,6 @@ const clickElements = document.querySelectorAll(".changeModal");
 clickElements.forEach((element) => {
   element.addEventListener("click", toggleModals);
 });
-
 //<-------------------- Add Image With Modal------------------------------
 let imageForm = "";
 let categoryForm = "";
