@@ -14,7 +14,7 @@ LoginForm?.addEventListener("submit", function (event) {
     email: event.target.querySelector("[name=email]").value,
     password: event.target.querySelector("[name=password]").value
   };
-  console.dir(tryLogin);
+  // console.dir(tryLogin);
   const loginJson = JSON.stringify(tryLogin);
   const   loginParameter=  {
     method: "POST",
@@ -40,9 +40,9 @@ LoginForm?.addEventListener("submit", function (event) {
         localStorage.setItem("Token" , JSON.stringify(token));
         let local =  localStorage.getItem("Token");
         let parsedLocal = JSON.parse(local);
-        console.log(local, 'string');
-        console.log(parsedLocal, 'parsed');
         window.location.href = "index.html";
+        // console.log(local, 'string');
+        // console.log(parsedLocal, 'parsed');
       },
       default: () => {
         error.style.display = "block";
@@ -62,14 +62,14 @@ LoginForm?.addEventListener("submit", function (event) {
 
   fetchLogin(url,  loginParameter)
   .then((response) => {
-    console.log(response, "ce que sa devrait afficer");      
+    // console.log(response, "ce que sa devrait afficer");      
     status = response.status; 
-    console.log(status);
+    // console.log(status);
     return response.json();
   })
   .then((response)=> {
     token = response.token
-    console.log(token);
+    // console.log(token);
     AutorisationLogin(status);
     return token;
   })

@@ -274,8 +274,8 @@ footer nav ul {
 	height: 59px;
 	color: #fff;
 	gap: 20px;
-	width: calc(100% + 300px);
-    margin-left: -150px;
+	width: calc(100% + 400px);
+    margin-left: -190px;
   }
   .editor__elements{
 	display: flex;
