@@ -283,6 +283,7 @@ function addImage() {
           previewImg.src = "";
           previewImg.style.setProperty("display", "none");
           imgContainer.style.setProperty("display", "flex");
+          titleForm = null;
           setTimeout(() => {
             errorAdd.innerText = "";
           }, 4000);
