@@ -71,7 +71,6 @@ async function fetchCategory() {
   });
 }
 fetchCategory();
-
 //<---------------------FILTER Add Event on btn------------------------------
 //Fetch data, apply filtering, and assign buttons to the corresponding functions, then update the gallery using the filtered array.
 function filtrer(btn, categorie, array) {

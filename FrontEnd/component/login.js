@@ -3,7 +3,6 @@ import { fetchLogin } from "../lib/fetch.js";
 let token;
 let status;
 let url = "http://localhost:5678/api/users/login";
-
 //function that takes values entered by the user and stores them in an object
 function login(){
 const LoginForm = document.querySelector(".login");
